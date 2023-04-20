@@ -10,12 +10,12 @@
         <div class="d-flex ms-auto me-3">
             <nav>
                 <ul id="list-contenedor" class="d-flex justify-content-around align-items-center">
-                    <router-link class="nav-link px-3" to="/HomeRoot">Inicio</router-link>
-                    <router-link class="nav-link px-3" to="">Cursos</router-link>
+                    <router-link class="link-nav px-3" to="/HomeRoot">Inicio</router-link>
+                    <router-link class="link-nav px-3" to="">Cursos</router-link>
                     <ShowCards></ShowCards>
-                    <router-link class="nav-link px-3" to="">Login</router-link>
+                    <router-link class="link-nav px-3" to="">Login</router-link>
                     <FormLogin></FormLogin>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Logout
                     </button>
                     <!-- <p class="mb-0">{{usuarioConectado}}</p> -->
@@ -43,9 +43,9 @@
   </div>
 </div>
 </div>
-    </template>
+</template>
     
-    <script>
+<script>
 // import FormLogin from './FormLogin.vue';
 // import ShowCards from './ShowCards.vue';
 export default {
@@ -68,10 +68,31 @@ export default {
     margin: 0%;
     font-family: 'Montserrat', sans-serif;
 }
+.link-nav{
+    text-decoration: none;
+    color: azure;
+    transition: all 0.5s ease;
+}
+.link-nav:hover{
+    transform: scale(1.2);
+}
 
 .list-item{
     cursor: pointer;
 }
+
+.btn-logout{
+    text-decoration: none;
+    color: azure;
+    border: none;
+    transition: all 0.5s ease;
+    background-color: #F57ED2;
+}
+
+.btn-logout:hover{
+    transform: scale(1.2);
+}
+
 
 .btn.btn-no{
     background-color: #82daf0;
@@ -83,7 +104,4 @@ export default {
     color: azure;
 }
 
-.btn{
-    color: azure;
-}
 </style>

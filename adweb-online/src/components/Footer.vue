@@ -1,7 +1,8 @@
 <template>
 <footer>
     <img src="../assets/logo.png" alt="" width="100">
-    <p>Gabriela<span> | Valentina</span><span> | Valentina</span><span> | Macarena</span></p>
+    <div class="nombres">
+    <p>Gabriela<span> | Valentina</span><span> | Valentina</span><span> | Macarena</span></p></div>
     <!-- <img src="../assets/logo.png" width="200"  alt=""> -->
 </footer>
 </template>
@@ -21,4 +22,5 @@ text-align: center;
 font-size: 14px;
 color: azure;
 }
+
 </style>

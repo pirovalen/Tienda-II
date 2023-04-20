@@ -23,8 +23,8 @@ name: "Home-Root",
 components: {
     NavBar,
     Footer
+    }
 }
-};
 </script>
 
 <style>
