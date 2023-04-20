@@ -1,6 +1,8 @@
 <template>
 <footer>
-    <img src="../assets/logo.png" width="200"  alt="">
+    <img src="../assets/logo.png" alt="" width="100">
+    <p>Gabriela<span> | Valentina</span><span> | Valentina</span><span> | Macarena</span></p>
+    <!-- <img src="../assets/logo.png" width="200"  alt=""> -->
 </footer>
 </template>
 
@@ -12,10 +14,11 @@ name: 'footer'
 
 <style>
 footer {
-background-color: #F082AC;
+background-color: #82daf0;
 margin-top: 5em;
 padding: 50px;
 text-align: center;
-font-size: 12px;
+font-size: 14px;
+color: azure;
 }
 </style>
