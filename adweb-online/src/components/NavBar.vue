@@ -19,8 +19,8 @@
     </template>
     
     <script>
-import FormLogin from './FormLogin.vue';
-import ShowCards from './ShowCards.vue';
+// import FormLogin from './FormLogin.vue';
+// import ShowCards from './ShowCards.vue';
 export default {
 name: 'NavBar'
 }
