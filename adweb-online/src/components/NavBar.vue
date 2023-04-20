@@ -22,14 +22,18 @@
 // import FormLogin from './FormLogin.vue';
 // import ShowCards from './ShowCards.vue';
 export default {
-name: 'NavBar'
+    data (){
+    },
+    components:{
+    NavBar,
+    Footer
+    }
 }
 </script>
-
 <style>
 .titulo__pagina{
-font-family: 'Montserrat', sans-serif;
-padding-bottom: 1em;
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 1em;
 }
 
 #login{
@@ -38,11 +42,13 @@ padding-bottom: 1em;
 
 #list-contenedor{
     list-style-type: none;
-
+    background-color: #F082AC;
+    margin-top: 5em;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .list-item{
     cursor: pointer;
 }
-
 </style>
