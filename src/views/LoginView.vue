@@ -10,6 +10,8 @@
         <input name="password" type="password" v-model.trim="loginForm.password" required />
       </div>
       <button type="submit">Login</button>
+      <br /><br />
+      <!-- <button @click="accessToken()">Access Token</button> -->
     </form>
     <br />
     <div v-if="error">{{ error }}</div>
