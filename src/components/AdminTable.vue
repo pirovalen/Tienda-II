@@ -31,21 +31,21 @@
               <th scope="col">Eliminar</th>
           </tr>
       </thead>
-      <TBody>
-          <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
+      <tbody >
+          <tr v-for="curso in cursos" :key="curso.nombre">
+              <td>{{ curso.id }}</td>
+              <td>{{ curso.nombre }}</td>
+              <td>{{ curso.estado }}</td>
+              <td>{{ curso.precio }}</td>
+              <td>{{ curso.duracion }}</td>
+              <td>{{ curso.descripcion }}</td>
+              <td>{{ curso.cupos }}</td>
+              <td>{{ curso.inscritos}}</td>
+              <td>{{ curso.img }}</td>
               <td><button class="btn btn-modificar" id="modificar" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button></td>
               <td><button class="btn btn-modificar" id="borrar" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">&#128465;</button></td>
           </tr>
-      </TBody>
+      </tbody>
       </table>
   </div>
   </div>
@@ -144,15 +144,19 @@
       </div>
     </div>
   </div>
-  <button @click="extraerData">click</button>
-  <button @click="mostrarCurso">click</button>
+<!--   <button @click="extraerData">click</button>
+  <button @click="mostrarCurso">click</button> -->
   </template>
     
     <script>
+/*     import {mapState} from 'vuex'; */
     import { collection, getDocs } from "firebase/firestore";
     import { db } from "@/auth/auth.service";
     export default {
       name: 'AdminTable',
+      mounted(){
+        this.extraerData()
+      },
       props: { 
       },
       data() {
@@ -160,6 +164,10 @@
           cursos: [],
         }
       },
+      computed: {
+/*         ...mapState(['cursos']) */
+      },
+
       methods: {
       async extraerData() {
 
