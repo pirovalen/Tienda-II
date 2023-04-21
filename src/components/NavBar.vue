@@ -71,6 +71,7 @@
         transition: all 0.5s ease;
     }
     .link-nav:hover{
+        color: #F57ED2;
         transform: scale(1.2);
     }
     .list-item{
