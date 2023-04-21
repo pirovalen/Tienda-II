@@ -144,15 +144,43 @@
       </div>
     </div>
   </div>
+  <button @click="extraerData">click</button>
+  <button @click="mostrarCurso">click</button>
   </template>
     
     <script>
+    import { collection, getDocs } from "firebase/firestore";
+    import { db } from "@/auth/auth.service";
     export default {
       name: 'AdminTable',
-      props: {
-        
+      props: { 
+      },
+      data() {
+        return {
+          cursos: [],
+        }
+      },
+      methods: {
+      async extraerData() {
+
+        const querySnapshot = await getDocs(collection(db, "adweb-online"));
+        console.log(querySnapshot)
+        querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data().nombre);
+           this.cursos.push(doc.data());
+       });
+
+       console.log(this.cursos);
+       },
+       mostrarCurso(){
+           this.cursos.forEach((element)=>{
+
+               console.log(element.nombre)
+           })
+       }
       }
-    }
+}
+
     </script>
     
     <!-- Add "scoped" attribute to limit CSS to this component only -->
