@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="loggin" class="mt-5">
     <form @submit.prevent="login" ref="form">
       <div class="form-group">
         <label>Email:</label>
@@ -20,7 +20,6 @@
 
 <script>
 import { auth } from "@/auth/auth.service";
-
 export default {
   data() {
     return {
@@ -53,9 +52,8 @@ export default {
   },
 };
 </script>
-
 <style>
-#app {
+#loggin {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,18 +64,15 @@ export default {
   margin-top: 50px;
   margin-top: -20px;
 }
-
 .form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
-
 .form-group label {
   margin-bottom: 5px;
   font-weight: bold;
 }
-
 .form-group input {
   padding: 10px;
   border: 1px solid #ccc;
@@ -85,7 +80,6 @@ export default {
   font-size: 16px;
   outline: none;
 }
-
 button[type="submit"] {
   padding: 10px 20px;
   background-color: #42b983;
@@ -95,7 +89,6 @@ button[type="submit"] {
   font-size: 16px;
   cursor: pointer;
 }
-
 button[type="submit"]:hover {
   background-color: #2ea879;
 }
