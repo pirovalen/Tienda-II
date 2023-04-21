@@ -81,6 +81,7 @@ export default {
   outline: none;
 }
 button[type="submit"] {
+  margin-top: 1rem;
   padding: 10px 20px;
   background-color: #F57ED2;
   border: none;
