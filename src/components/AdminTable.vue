@@ -1,17 +1,17 @@
 <template>
   <div class="container">
   <div class="row">
-  <h2 class="py-3">Administrador de Cursos</h2>
+  <h2 class="titulo">Administrador de Cursos</h2>
   </div>
-  <div class="row justify-content-between align-items-center py-4" id="searchContainer">
-      <div id="search"  class="col-8" style="display: flex; align-items: center;">
+  <div class="row justify-content-between py-4" id="searchContainer">
+      <div id="search"  class="col-8" style="display: flex;">
         <input id="input-search" class="w-100 mx-2"  type="text" placeholder="Ingrese su búsqueda" >
-        <button id="buttonSearch" class="btn btn-primary" >
+        <button id="buttonSearch" class="btn btn-buscar" >
           <i class="fa fa-search"></i> Buscar
         </button>
       </div>
       <div class="col-2"> 
-        <button type="button" class="btn btn-primary" id="new" data-bs-toggle="modal" data-bs-target="#createModal">Agregar Curso</button>
+        <button type="button" class="btn btn-agregar" id="new" data-bs-toggle="modal" data-bs-target="#createModal">Agregar Curso</button>
       </div>
     </div>
   <div class="row">
@@ -42,8 +42,8 @@
               <td>7</td>
               <td>8</td>
               <td>9</td>
-              <td><button class="btn btn-primary" id="modificar" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button></td>
-              <td><button class="btn btn-primary" id="borrar" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">&#128465;</button></td>
+              <td><button class="btn btn-modificar" id="modificar" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button></td>
+              <td><button class="btn btn-modificar" id="borrar" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">&#128465;</button></td>
           </tr>
       </TBody>
       </table>
@@ -62,8 +62,8 @@
          ¿Estás seguro que deseas eliminar este curso?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger">Eliminar</button>
+          <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-eliminar">Eliminar</button>
         </div>
       </div>
     </div>
@@ -100,8 +100,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary">Modificar</button>
+          <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-modificar">Modificar</button>
         </div>
       </div>
     </div>
@@ -138,24 +138,99 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary">Crear</button>
+          <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-crear">Crear</button>
         </div>
       </div>
     </div>
   </div>
+  <button @click="extraerData">click</button>
+  <button @click="mostrarCurso">click</button>
   </template>
     
     <script>
+    import { collection, getDocs } from "firebase/firestore";
+    import { db } from "@/auth/auth.service";
     export default {
       name: 'AdminTable',
-      props: {
-        
+      props: { 
+      },
+      data() {
+        return {
+          cursos: [],
+        }
+      },
+      methods: {
+      async extraerData() {
+
+        const querySnapshot = await getDocs(collection(db, "adweb-online"));
+        console.log(querySnapshot)
+        querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data().nombre);
+           this.cursos.push(doc.data());
+       });
+
+       console.log(this.cursos);
+       },
+       mostrarCurso(){
+           this.cursos.forEach((element)=>{
+
+               console.log(element.nombre)
+           })
+       }
       }
-    }
+}
+
     </script>
     
     <!-- Add "scoped" attribute to limit CSS to this component only -->
-    <style scoped>
-    
+    <style>
+.container{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.titulo{
+  padding-top: 5rem;
+}
+
+.table.table-bordered{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.modal-content{
+font-family: 'Montserrat', sans-serif;
+}
+
+#search{
+  border-radius: 50px;
+}
+
+.btn.btn-crear,.btn.btn-modificar{
+        background-color: #82daf0;
+        color: azure;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .btn.btn-crear:hover,.btn.btn-modificar:hover{
+        background-color: #71c3d7;
+        color: azure;
+    }
+    .btn.btn-cancelar,.btn.btn-agregar,.btn.btn-buscar{
+        background-color: #f082bf;
+        color: azure;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .btn.btn-cancelar:hover,.btn.btn-agregar:hover,.btn.btn-buscar:hover{
+        background-color: #d676ab;
+        color: azure;
+    }
+
+    .btn.btn-eliminar{
+        background-color: #964a74;
+        color: azure;
+    }
+    .btn.btn-eliminar:hover{
+        background-color: #693a54;
+        color: azure;
+    }
+
     </style>
