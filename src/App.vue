@@ -1,7 +1,8 @@
 <template>
   <NavBar />
-  <LoginView/>
+  <router-view />
   <Footer/>
+
   <!-- <router-view /> -->
   </template>
   
@@ -13,7 +14,6 @@
     name: 'App',
     components: {
       NavBar,
-      LoginView,
       Footer
     }
   }

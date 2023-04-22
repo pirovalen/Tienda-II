@@ -2,14 +2,14 @@
   <div id="loggin" class="mt-5">
     <form @submit.prevent="login" ref="form">
       <div class="form-group">
-        <label>Email:</label>
+        <label>Correo</label>
         <input name="email" type="email" v-model.trim="loginForm.email" required />
       </div>
       <div class="form-group">
-        <label>Password:</label>
+        <label>Contraseña</label>
         <input name="password" type="password" v-model.trim="loginForm.password" required />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit">Iniciar Sesión</button>
       <br /><br />
       <!-- <button @click="accessToken()">Access Token</button> -->
     </form>
@@ -58,7 +58,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-align: center;
   color: #2c3e50;
   margin-top: 50px;
@@ -71,7 +71,7 @@ export default {
 }
 .form-group label {
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: 500;
 }
 .form-group input {
   padding: 10px;
@@ -81,8 +81,9 @@ export default {
   outline: none;
 }
 button[type="submit"] {
+  margin-top: 1rem;
   padding: 10px 20px;
-  background-color: #42b983;
+  background-color: #F57ED2;
   border: none;
   color: #fff;
   border-radius: 5px;
@@ -90,6 +91,6 @@ button[type="submit"] {
   cursor: pointer;
 }
 button[type="submit"]:hover {
-  background-color: #2ea879;
+  background-color: #82daf0;
 }
 </style>

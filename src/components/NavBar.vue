@@ -10,11 +10,10 @@
             <div class="d-flex ms-auto me-3">
                 <nav>
                     <ul id="list-contenedor" class="d-flex justify-content-around align-items-center">
-                        <router-link class="link-nav px-3" to="/HomeRoot">Inicio</router-link>
-                        <router-link class="link-nav px-3" to="">Cursos</router-link>
-                        <ShowCards></ShowCards>
-                        <router-link class="link-nav px-3" to="">Login</router-link>
-                        <FormLogin></FormLogin>
+                        <router-link class="link-nav px-3" to="">Inicio</router-link>
+                        <router-link class="link-nav px-3" to="/HomeView">Cursos</router-link>
+                        <router-link class="link-nav px-3" to="/AdminView">Administrador</router-link>
+                        <router-link class="link-nav px-3" to="/">Login</router-link>
                         <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Logout
                         </button>
@@ -71,6 +70,7 @@
         transition: all 0.5s ease;
     }
     .link-nav:hover{
+        color: #F57ED2;
         transform: scale(1.2);
     }
     .list-item{
@@ -90,8 +90,19 @@
         background-color: #82daf0;
         color: azure;
     }
+    .btn.btn-no:hover{
+        background-color: #71c3d7;
+        color: azure;
+    }
     .btn.btn-si{
         background-color: #f082bf;
         color: azure;
+    }
+    .btn.btn-si:hover{
+        background-color: #d676ab;
+        color: azure;
+    }
+    #exampleModal{
+        font-family: 'Montserrat', sans-serif;
     }
     </style>
