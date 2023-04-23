@@ -14,7 +14,8 @@
         <button type="button" class="btn btn-agregar" id="new" data-bs-toggle="modal" data-bs-target="#createModal">Agregar Curso</button>
       </div>
     </div>
-  <div class="row">
+  <div v-if="carga">Cargando...</div>
+  <div class="row" v-else>
       <table class="table table-bordered">
       <thead class="table-primary">
           <tr>
@@ -162,6 +163,7 @@
       data() {
         return {
           cursos: [],
+          carga: false,
         }
       },
       computed: {
@@ -170,7 +172,7 @@
 
       methods: {
       async extraerData() {
-
+        this.carga = true;
         const querySnapshot = await getDocs(collection(db, "adweb-online"));
         console.log(querySnapshot)
         querySnapshot.forEach((doc) => {
@@ -179,6 +181,7 @@
        });
 
        console.log(this.cursos);
+       this.carga = false;
        },
        mostrarCurso(){
            this.cursos.forEach((element)=>{
