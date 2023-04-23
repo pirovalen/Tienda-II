@@ -140,7 +140,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-crear">Crear</button>
+          <button type="button" class="btn btn-crear" @click="createCurso()">Crear</button>
         </div>
       </div>
     </div>
@@ -151,7 +151,7 @@
     
     <script>
 /*     import {mapState} from 'vuex'; */
-    import { collection, getDocs } from "firebase/firestore";
+    import { collection, getDocs, doc, setDoc } from "firebase/firestore";
     import { db } from "@/auth/auth.service";
     export default {
       name: 'AdminTable',
@@ -183,12 +183,28 @@
        console.log(this.cursos);
        this.carga = false;
        },
-       mostrarCurso(){
+      
+      mostrarCurso(){
            this.cursos.forEach((element)=>{
-
                console.log(element.nombre)
            })
-       }
+       },
+      
+      async createCurso() {
+       await setDoc(doc(db, "adweb-online", ""), {
+        codigo: "Los Angeles",
+        nombre: "",
+        estado: "",
+        precio: "",
+        duracion: "",
+        descripcion: "",
+        cupos: "",
+        inscritos: "",
+        img: "",
+
+        });
+      }
+
       }
 }
 

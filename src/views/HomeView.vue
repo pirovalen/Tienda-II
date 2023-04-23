@@ -1,12 +1,14 @@
 <template>
     <div class="container mt-5">
         <div class="row">
-        <div class="col text-center">
-            <img alt="Vue logo" src="../assets/logo.png" width="100"/>
-            <p class="fst-italic py-5">El mejor lugar para aprender</p>
-            
+            <div v-if="cargarCards">
+                <div class="col text-center">
+                <img alt="Vue logo" src="../assets/logo.png" width="100"/>
+                <p class="fst-italic py-5">El mejor lugar para aprender</p>
+                </div>
+            </div>    
             <!-- <Button type="button" class="btn--ver" ><router-link class="nav-link px-3" to="/>Revisar cursos</router-link></Button> -->
-
+            <div v-else>
             <div class="card" style="width: 18rem;"  v-for="curso in cursos" :key="curso.nombre">
                 <img src="{{curso.img}}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -21,7 +23,8 @@
                 </ul>
 
             </div>
-        </div>
+            </div>
+        
         </div>
     </div>
     </template>
@@ -42,11 +45,12 @@
         data() {
         return {
           cursos: [],
+          cargarCards: false,
         }
       },
         methods: {
       async extraerData() {
-
+        this.cargarCards = true;
         const querySnapshot = await getDocs(collection(db, "adweb-online"));
         console.log(querySnapshot)
         querySnapshot.forEach((doc) => {
@@ -56,6 +60,7 @@
        
        console.log(this.cursos);
        console.log(this.cursos.img);
+       this.cargarCards = false;
        },
     //    mostrarCurso(){
     //        this.cursos.forEach((element)=>{
