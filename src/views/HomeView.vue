@@ -31,32 +31,37 @@
     // @ is an alias to /src
     import NavBar from '../components/NavBar.vue'
     import Footer from '../components/Footer.vue'
-    import { collection, getDocs } from "firebase/firestore";
-    import { db } from "@/auth/auth.service";
+    // import { collection, getDocs } from "firebase/firestore";
+    // import { db } from "@/auth/auth.service";
+    import {mapActions, mapState} from 'vuex' 
 
     export default {
-    name: "Home-Root",
-    mounted(){
-        this.extraerData()
-    },
-        data() {
-        return {
-          cursos: [],
-        }
-      },
+    name: "Home-View",
+    // mounted(){
+    //     this.extraerData()
+    // },
+    //     data() {
+    //     return {
+    //       cursos: [],
+    //     }
+    //   },
+        created(){
+            this.getCursos()
+        },
         methods: {
-      async extraerData() {
+            ...mapActions(['getCursos'])
+    //   async extraerData() {
 
-        const querySnapshot = await getDocs(collection(db, "adweb-online"));
-        console.log(querySnapshot)
-        querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data().nombre);
-           this.cursos.push(doc.data());
-       });
+    //     const querySnapshot = await getDocs(collection(db, "adweb-a1409"));
+    //     console.log(querySnapshot)
+    //     querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, " => ", doc.data().nombre);
+    //        this.cursos.push(doc.data());
+    //    });
        
-       console.log(this.cursos);
-       console.log(this.cursos.img);
-       },
+    //    console.log(this.cursos);
+    //    console.log(this.cursos.img);
+    //    },
     //    mostrarCurso(){
     //        this.cursos.forEach((element)=>{
 
@@ -64,6 +69,9 @@
     //        })
     //    }
       },
+      computed : {
+        ...mapState(['cursos'])
+      }
       
     }
     
