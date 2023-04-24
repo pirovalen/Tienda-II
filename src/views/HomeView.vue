@@ -6,6 +6,7 @@
     <div class="subtitulo">
     <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p></div>
     <div class="container mt-5">
+
         <div class="row gap-5">
             <!-- <div class="col-sm-3 mb-3 mb-sm-0"> -->
             <div class="card border-info mb-3" style="width: 18rem;"  v-for="curso in cursos" :key="curso.nombre">
@@ -18,6 +19,7 @@
                     <li class="list-group-item">Duración: {{curso.duracion  }}</li>
                     <li class="list-group-item">Cupos: {{curso.cupos }}</li>
                     <li class="list-group-item">Precio: ${{ curso.precio }}</li>
+
                 </ul>
             <!-- </div> -->
             </div>
@@ -30,32 +32,39 @@
     // @ is an alias to /src
     import NavBar from '../components/NavBar.vue'
     import Footer from '../components/Footer.vue'
-    import { collection, getDocs } from "firebase/firestore";
-    import { db } from "@/auth/auth.service";
+
+    // import { collection, getDocs } from "firebase/firestore";
+    // import { db } from "@/auth/auth.service";
+    import {mapActions, mapState} from 'vuex' 
 
     export default {
-    name: "Home-Root",
-    mounted(){
-        this.extraerData()
-    },
-        data() {
-        return {
-          cursos: [],
-        }
-      },
+    name: "Home-View",
+    // mounted(){
+    //     this.extraerData()
+    // },
+    //     data() {
+    //     return {
+    //       cursos: [],
+    //     }
+    //   },
+        created(){
+            this.getCursos()
+        },
         methods: {
-      async extraerData() {
+            ...mapActions(['getCursos'])
+    //   async extraerData() {
 
-        const querySnapshot = await getDocs(collection(db, "adweb-online"));
-        console.log(querySnapshot)
-        querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data().nombre);
-           this.cursos.push(doc.data());
-       });
+    //     const querySnapshot = await getDocs(collection(db, "adweb-a1409"));
+    //     console.log(querySnapshot)
+    //     querySnapshot.forEach((doc) => {
+    //     console.log(doc.id, " => ", doc.data().nombre);
+    //        this.cursos.push(doc.data());
+    //    });
        
-       console.log(this.cursos);
-       console.log(this.cursos.img);
-       },
+    //    console.log(this.cursos);
+    //    console.log(this.cursos.img);
+    //    },
+
     //    mostrarCurso(){
     //        this.cursos.forEach((element)=>{
 
@@ -63,6 +72,11 @@
     //        })
     //    }
       },
+
+      computed : {
+        ...mapState(['cursos'])
+      }
+
       
     }
     
