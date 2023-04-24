@@ -31,6 +31,7 @@
               <th scope="col">Eliminar</th>
           </tr>
       </thead>
+
       <TBody>
           <tr v-for="curso in cursos" :key="curso.nombre">
               <td>{{curso.id}}</td>
@@ -47,8 +48,9 @@
                  
               </td>
               <td><button class="btn btn-modificar" id="borrar" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"  @click="borrarCurso(curso.id)">&#128465;</button></td>
+
           </tr>
-      </TBody>
+      </tbody>
       </table>
   </div>
   </div>
@@ -149,11 +151,12 @@
       </div>
     </div>
   </div>
-  <button @click="extraerData">click</button>
-  <button @click="mostrarCurso">click</button>
+<!--   <button @click="extraerData">click</button>
+  <button @click="mostrarCurso">click</button> -->
   </template>
     
     <script>
+
     import {mapActions, mapState} from 'vuex';
     import { collection, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
     import { db } from "@/auth/auth.service"
@@ -202,6 +205,7 @@
     borrarCurso(element){
       this.idBorrar = element
     },
+
 
     async deleteCourse (){
       await deleteDoc(doc(db,"adweb-online", this.idBorrar))

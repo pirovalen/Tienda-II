@@ -1,14 +1,16 @@
 <template>
+    <div class="titulo">
+    <img src="../assets/4529183.jpg" alt="" width="300">
+    <h2>Inscribite hoy y aprende desde tu casa</h2>
+    </div>
+    <div class="subtitulo">
+    <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p></div>
     <div class="container mt-5">
-        <div class="row">
-        <div class="col text-center">
-            <img alt="Vue logo" src="../assets/logo.png" width="100"/>
-            <p class="fst-italic py-5">El mejor lugar para aprender</p>
-            
-            <!-- <Button type="button" class="btn--ver" ><router-link class="nav-link px-3" to="/>Revisar cursos</router-link></Button> -->
 
-            <div class="card" style="width: 18rem;"  v-for="curso in cursos" :key="curso.nombre">
-                <img src="{{curso.img}}" class="card-img-top" alt="...">
+        <div class="row gap-5">
+            <!-- <div class="col-sm-3 mb-3 mb-sm-0"> -->
+            <div class="card border-info mb-3" style="width: 18rem;"  v-for="curso in cursos" :key="curso.nombre">
+                <img :src= "curso.img" class="card-img-top" alt="img">
                 <div class="card-body">
                     <h5 class="card-title">{{curso.nombre}}</h5>
                     <p class="card-text">{{curso.descripcion}}</p>
@@ -19,18 +21,18 @@
                     <li class="list-group-item">Precio: ${{ curso.precio }}</li>
 
                 </ul>
-
+            <!-- </div> -->
             </div>
         </div>
-        </div>
     </div>
-    </template>
+</template>
     
     
     <script>
     // @ is an alias to /src
     import NavBar from '../components/NavBar.vue'
     import Footer from '../components/Footer.vue'
+
     // import { collection, getDocs } from "firebase/firestore";
     // import { db } from "@/auth/auth.service";
     import {mapActions, mapState} from 'vuex' 
@@ -62,6 +64,7 @@
     //    console.log(this.cursos);
     //    console.log(this.cursos.img);
     //    },
+
     //    mostrarCurso(){
     //        this.cursos.forEach((element)=>{
 
@@ -69,15 +72,44 @@
     //        })
     //    }
       },
+
       computed : {
         ...mapState(['cursos'])
       }
+
       
     }
     
     </script>
     
     <style>
+    .titulo{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    }
+
+    .subtitulo{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    padding-inline: 15rem ;
+    }
+
+    .card{
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .card-img-top{
+    max-width: 8rem;
+    height: 160px;
+    align-self: center;
+    padding-top: 2rem;
+    }
+
+    .card-body{
+    padding-top: 7rem;
+    }
+
     .btn--ver{
     background-color: #EA4C89;
     border-radius: 8px;
