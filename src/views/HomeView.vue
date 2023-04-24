@@ -1,5 +1,6 @@
 <template>
     <div class="titulo">
+    <img src="../assets/4529183.jpg" alt="" width="300">
     <h2>Inscribite hoy y aprende desde tu casa</h2>
     </div>
     <div class="subtitulo">
