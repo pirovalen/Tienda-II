@@ -1,5 +1,5 @@
 <template>
- 
+
 </template>
     
     
@@ -10,7 +10,6 @@
     name: "Home-View",
       
     }
-    
     </script>
     
     <style>

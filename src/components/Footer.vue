@@ -2,8 +2,7 @@
     <footer>
         <img src="../assets/logo.png" alt="" width="100">
         <div class="nombres">
-        <p>Gabriela<span> | Valentina</span><span> | Valentina</span><span> | Macarena</span></p></div>
-        <!-- <img src="../assets/logo.png" width="200"  alt=""> -->
+        <p>Gabriela<span> | Valentina</span><span> | Valentina</span><span> | Macarena</span><span> | Myrian </span></p></div>
     </footer>
     </template>
     
