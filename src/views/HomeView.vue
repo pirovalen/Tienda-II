@@ -76,17 +76,4 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
 }
-
-
-    .titulo{
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    }
-
-    .subtitulo{
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    padding-inline: 15rem ;
-    }
     </style>
