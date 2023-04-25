@@ -43,14 +43,14 @@ export default createStore({
           commit('getCursos', cursos)
     },
 
-    async createCourse ({}, payload) {
-      await setDoc(doc(db, "adweb-online", payload.codigo), {
-        nombre: payload.nombre,
-        codigo: payload.codigo,
-        descripcion: payload.descripcion
-      });
-      console.log(payload);
-    }
+    // async createCourse ({}, payload) {
+    //   await setDoc(doc(db, "adweb-online", payload.codigo), {
+    //     nombre: payload.nombre,
+    //     codigo: payload.codigo,
+    //     descripcion: payload.descripcion
+    //   });
+    //   console.log(payload);
+    // }
   },
   modules: {}
 });
