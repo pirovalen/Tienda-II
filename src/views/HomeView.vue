@@ -1,7 +1,6 @@
 <template>
     <div class="titulo">
-    <img src="../assets/4529183.jpg" alt="" width="300">
-    <h2>Inscribite hoy y aprende desde tu casa</h2>
+    <h2>Inscríbete hoy y aprende desde tu casa</h2>
     </div>
     <div class="subtitulo">
     <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p></div>
