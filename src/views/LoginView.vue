@@ -2,7 +2,7 @@
   <div id="login" class="mt-5">
     <form @submit.prevent="login" ref="form">
       <div class="form-group">
-        <label>Correo</label>
+        <label>Correo Electrónico</label>
         <input name="email" type="email" v-model.trim="loginForm.email" required />
       </div>
       <div class="form-group">
@@ -11,15 +11,52 @@
       </div>
       <button type="submit">Iniciar Sesión</button>
       <br /><br />
+      <div id="login" class="mt-2"> 
+        <h5>¿No tienes cuenta?</h5>
+        <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Regístrate!</button>
       <!-- <button @click="accessToken()">Access Token</button> -->
+      </div>
     </form>
     <br />
     <div v-if="error">{{ error }}</div>
   </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Registro</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div> -->
+        <button type="submit" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 import { auth } from "@/auth/auth.service";
+// import router from "@/router/index";
 import { SET_LOGIN_STATE } from "@/store/index";
 
 
@@ -43,6 +80,7 @@ export default {
         );
         console.log("Successfully logged in");
         this.$store.commit(SET_LOGIN_STATE, true);
+        this.$router.push({ name: "CoursesView" });
         this.error= ""
       } catch (err) {
         console.log(err.message);
@@ -86,6 +124,7 @@ export default {
 }
 button[type="submit"] {
   margin-top: 1rem;
+  margin-right: 1rem;
   padding: 10px 20px;
   background-color: #F57ED2;
   border: none;
