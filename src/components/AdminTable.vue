@@ -44,10 +44,10 @@
               <td>{{curso.inscritos}}</td>
               <td>{{curso.img}}</td>
               <td>
-                  <button class="btn btn-modificar"  id="modificar" @click="editar(curso.id)" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button>
+                  <button class="btn btn-modificar"  id="modificar" @click="getCurso(curso.id)" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button>
                  
               </td>
-              <td><button class="btn btn-modificar" id="borrar" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"  @click="borrarCurso(curso.id)">&#128465;</button></td>
+              <td><button class="btn btn-modificar" id="borrar" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" @click="idaBorrar(curso.id)">&#128465;</button></td>
 
           </tr>
       </tbody>
@@ -66,31 +66,32 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="form" action="">
+          <form class="form" @submit.prevent="getCursos(), modificarCurso(mostrarCurso)">
             <label for="code-obj" class="form-label">Código</label>
-            <input type="text" class="form-control" >
+            <input type="text" class="form-control" v-model="mostrarCurso.codigo">
             <label for="name-obj" class="form-label">Nombre</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="mostrarCurso.nombre">
             <label for="state-obj" class="form-label">Estado</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="mostrarCurso.estado">
             <label for="price-obj" class="form-label">Precio</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="mostrarCurso.precio">
             <label for="duration-obj" class="form-label">Duración</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="mostrarCurso.duracion">
             <label for="description-obj" class="form-label">Descripción</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="mostrarCurso.descripcion">
             <label for="capacity-obj" class="form-label">Cupos</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="mostrarCurso.cupos">
             <label for="enrolled-obj" class="form-label">Inscritos</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="mostrarCurso.inscritos">
             <label for="img-obj" class="form-label">Imagen</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="mostrarCurso.img">
+            <div class="modal-footer">
+          <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-modificar" data-bs-dismiss="modal">Modificar</button>
+        </div>
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-modificar">Modificar</button>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -108,7 +109,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-eliminar" data-bs-dismiss="this.modal" @click="deleteCourse()">Eliminar</button>
+          <button type="button" class="btn btn-eliminar" data-bs-dismiss="modal" @click="getCursos(), eliminarCurso(idBorrarCurso)">Eliminar</button>
         </div>
       </div>
     </div>
@@ -123,30 +124,30 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="form" action="">
+          <form class="form" @submit.prevent="getCursos(),crearCurso(agregarCurso),resetearCurso(agregarCurso)">
             <label for="code-obj" class="form-label" >Código</label>
-            <input type="text" class="form-control" v-model="codigo">
+            <input type="text" class="form-control" v-model="agregarCurso.codigo">
             <label for="name-obj" class="form-label">Nombre</label>
-            <input type="text" class="form-control" v-model="nombre">
+            <input type="text" class="form-control" v-model="agregarCurso.nombre">
             <label for="state-obj" class="form-label">Estado</label>
-            <input type="text" class="form-control" v-model="estado">
+            <input type="text" class="form-control" v-model="agregarCurso.estado">
             <label for="price-obj" class="form-label">Precio</label>
-            <input type="text" class="form-control" v-model="precio">
+            <input type="text" class="form-control" v-model="agregarCurso.precio">
             <label for="duration-obj" class="form-label">Duración</label>
-            <input type="text" class="form-control" v-model="duracion">
+            <input type="text" class="form-control" v-model="agregarCurso.duracion">
             <label for="description-obj" class="form-label">Descripción</label>
-            <input type="text" class="form-control" v-model="descripcion">
+            <input type="text" class="form-control" v-model="agregarCurso.descripcion">
             <label for="capacity-obj" class="form-label">Cupos</label>
-            <input type="text" class="form-control" v-model="cupos">
+            <input type="text" class="form-control" v-model="agregarCurso.cupos">
             <label for="enrolled-obj" class="form-label">Inscritos</label>
-            <input type="text" class="form-control" v-model="inscritos">
+            <input type="text" class="form-control" v-model="agregarCurso.inscritos">
             <label for="img-obj" class="form-label">Imagen</label>
-            <input type="text" class="form-control" v-model="img">
+            <input type="text" class="form-control" v-model="agregarCurso.img">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-crear" data-bs-dismiss="modal">Crear</button>
+            </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-crear" @click="createCourse()">Crear</button>
         </div>
       </div>
     </div>
@@ -158,117 +159,88 @@
     <script>
 
     import {mapActions, mapState} from 'vuex';
-    import { collection, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
-    import { db } from "@/auth/auth.service"
-
 
     export default {
       name: 'AdminTable',
       data(){
         return{
-          id: null,
-          codigo: "",
-          nombre: "",
-          estado: true,
-          precio: "",
-          duracion: "",
-          descripcion: "",
-          cupos: 0,
-          inscritos: 0,
-          img: "",
-          idBorrar: ""
+          agregarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
+          idBorrarCurso: ''
         }
       },
       created(){
             this.getCursos()
-            // this.getCurso(this.id)
+            this.getCurso(this.idEditar)
         },
         methods: {
-            ...mapActions(['getCursos', 'createCourse']),
+          ...mapActions(['getCursos', 'getCurso', 'crearCurso', 'modificarCurso','eliminarCurso']),
 
-    async createCourse () {
-      await setDoc(doc(db, "adweb-online", this.codigo), {
-        codigo: this.codigo,
-        nombre: this.nombre,
-        estado: this.estado,
-        precio: this.precio,
-        duracion: this.duracion,
-        descripcion: this.descripcion,
-        cupos: this.cupos,
-        inscritos: this.inscritos,
-        img: this.img
-        // nombre: payload.nombre,
-        // codigo: payload.codigo,
-        // descripcion: payload.descripcion
-      });
-    },
-    borrarCurso(element){
-      this.idBorrar = element
-    },
+          idaBorrar(elemento){
+            this.idBorrarCurso =  elemento
+          },
 
+          resetearCurso(){
+            this.agregarCurso =  {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''}
+          }
 
-    async deleteCourse (){
-      await deleteDoc(doc(db,"adweb-online", this.idBorrar))
-    }
+        },
 
-      },
         computed : {
-        ...mapState(['cursos'])
-      },
+        ...mapState(['cursos', 'mostrarCurso', 'agregarCurso'])
+        },
       
-
-
       }
     </script>
     
     <!-- Add "scoped" attribute to limit CSS to this component only -->
     <style>
-.container{
-  font-family: 'Montserrat', sans-serif;
-}
-
-.titulo{
-  padding-top: 5rem;
-}
-
-.table.table-bordered{
-  font-family: 'Montserrat', sans-serif;
-}
-
-.modal-content{
-font-family: 'Montserrat', sans-serif;
-}
-
-#search{
-  border-radius: 50px;
-}
-
-.btn.btn-crear,.btn.btn-modificar{
-        background-color: #82daf0;
-        color: azure;
+          
+      .container{
         font-family: 'Montserrat', sans-serif;
-    }
-    .btn.btn-crear:hover,.btn.btn-modificar:hover{
-        background-color: #71c3d7;
-        color: azure;
-    }
-    .btn.btn-cancelar,.btn.btn-agregar,.btn.btn-buscar{
-        background-color: #f082bf;
-        color: azure;
-        font-family: 'Montserrat', sans-serif;
-    }
-    .btn.btn-cancelar:hover,.btn.btn-agregar:hover,.btn.btn-buscar:hover{
-        background-color: #d676ab;
-        color: azure;
-    }
+      }
 
-    .btn.btn-eliminar{
-        background-color: #964a74;
-        color: azure;
-    }
-    .btn.btn-eliminar:hover{
-        background-color: #693a54;
-        color: azure;
-    }
+      .titulo{
+        padding-top: 5rem;
+      }
+
+      .table.table-bordered{
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      .modal-content{
+      font-family: 'Montserrat', sans-serif;
+      }
+
+      #search{
+        border-radius: 50px;
+      }
+
+      .btn.btn-crear,.btn.btn-modificar{
+              background-color: #82daf0;
+              color: azure;
+              font-family: 'Montserrat', sans-serif;
+          }
+          .btn.btn-crear:hover,.btn.btn-modificar:hover{
+              background-color: #71c3d7;
+              color: azure;
+          }
+          .btn.btn-cancelar,.btn.btn-agregar,.btn.btn-buscar{
+              background-color: #f082bf;
+              color: azure;
+              font-family: 'Montserrat', sans-serif;
+          }
+          .btn.btn-cancelar:hover,.btn.btn-agregar:hover,.btn.btn-buscar:hover{
+              background-color: #d676ab;
+              color: azure;
+          }
+
+          .btn.btn-eliminar{
+              background-color: #964a74;
+              color: azure;
+          }
+          .btn.btn-eliminar:hover{
+              background-color: #693a54;
+              color: azure;
+          }
 
     </style>

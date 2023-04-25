@@ -1,5 +1,5 @@
 <template>
-  <div id="loggin" class="mt-5">
+  <div id="login" class="mt-5">
     <form @submit.prevent="login" ref="form">
       <div class="form-group">
         <label>Correo</label>
@@ -20,6 +20,9 @@
 
 <script>
 import { auth } from "@/auth/auth.service";
+import { SET_LOGIN_STATE } from "@/store/index";
+
+
 export default {
   data() {
     return {
@@ -39,6 +42,7 @@ export default {
           this.loginForm.password
         );
         console.log("Successfully logged in");
+        this.$store.commit(SET_LOGIN_STATE, true);
         this.error= ""
       } catch (err) {
         console.log(err.message);
@@ -53,7 +57,7 @@ export default {
 };
 </script>
 <style>
-#loggin {
+#login {
   display: flex;
   flex-direction: column;
   justify-content: center;
