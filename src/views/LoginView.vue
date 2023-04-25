@@ -10,9 +10,12 @@
         <input name="password" type="password" v-model.trim="loginForm.password" required />
       </div>
       <button type="submit">Iniciar Sesión</button>
-      <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Registrarse</button>
       <br /><br />
+      <div id="login" class="mt-2"> 
+        <h5>¿No tienes cuenta?</h5>
+        <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Regístrate!</button>
       <!-- <button @click="accessToken()">Access Token</button> -->
+      </div>
     </form>
     <br />
     <div v-if="error">{{ error }}</div>
@@ -44,7 +47,7 @@
           <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div> -->
         <button type="submit" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit">Tiene que acectá</button>
+        <button type="submit">Aceptar</button>
       </div>
     </div>
   </div>
@@ -53,6 +56,7 @@
 
 <script>
 import { auth } from "@/auth/auth.service";
+// import router from "@/router/index";
 import { SET_LOGIN_STATE } from "@/store/index";
 
 
@@ -76,6 +80,7 @@ export default {
         );
         console.log("Successfully logged in");
         this.$store.commit(SET_LOGIN_STATE, true);
+        this.$router.push({ name: "CoursesView" });
         this.error= ""
       } catch (err) {
         console.log(err.message);
