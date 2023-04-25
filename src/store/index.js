@@ -9,7 +9,7 @@ export const SET_LOGIN_STATE = 'SET_LOGIN_STATE';
 export default createStore({
   state: {
     cursos: [],
-    mostrarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''}
+    mostrarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
     login:false
   },
 
