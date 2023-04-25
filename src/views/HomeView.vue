@@ -41,8 +41,6 @@
     
     
     <script>
-
-
     export default {
     name: "Home-View",
       
