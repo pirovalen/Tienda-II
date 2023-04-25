@@ -1,19 +1,25 @@
 import { createStore } from 'vuex'
 import { collection, getDocs, doc, getDoc, deleteDoc, setDoc} from "firebase/firestore";
 import { db } from "@/auth/auth.service"
-import router from '@/router'
+
+export const SET_LOGIN_STATE = 'SET_LOGIN_STATE';
+
 
 
 export default createStore({
   state: {
     cursos: [],
     mostrarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''}
+    login:false
   },
 
   getters: {
   },
 
   mutations: {
+    [SET_LOGIN_STATE](state, payload) {
+      state.login = payload;
+    },
     getCursos(state,payload){
       state.cursos = payload
     },
@@ -22,6 +28,7 @@ export default createStore({
     },
 
   },
+
 
   actions: {
     async getCursos ({commit}){
@@ -92,3 +99,4 @@ export default createStore({
   }
 
 })
+
