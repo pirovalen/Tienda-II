@@ -1,94 +1,13 @@
 <template>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="..." alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-    <div class="titulo">
-    <h2>Inscríbete hoy y aprende desde tu casa</h2>
-    </div>
-    <div class="subtitulo">
-    <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p></div>
-    <div class="container mt-5">
-        <div class="row gap-5">
-            <!-- <div class="col-sm-3 mb-3 mb-sm-0"> -->
-            <div class="card border-info mb-3" style="width: 18rem;"  v-for="curso in cursos" :key="curso.nombre">
-                <img :src= "curso.img" class="card-img-top" alt="img">
-                <div class="card-body">
-                    <h5 class="card-title">{{curso.nombre}}</h5>
-                    <p class="card-text">{{curso.descripcion}}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Duración: {{curso.duracion  }}</li>
-                    <li class="list-group-item">Cupos: {{curso.cupos }}</li>
-                    <li class="list-group-item">Precio: ${{ curso.precio }}</li>
-                </ul>
-            <!-- </div> -->
-            </div>
-        </div>
-    </div>
+ 
 </template>
     
     
     <script>
-    // @ is an alias to /src
-    import NavBar from '../components/NavBar.vue'
-    import Footer from '../components/Footer.vue'
-    import { collection, getDocs } from "firebase/firestore";
-    import { db } from "@/auth/auth.service";
+
 
     export default {
-    name: "Home-Root",
-    mounted(){
-        this.extraerData()
-    },
-        data() {
-        return {
-          cursos: [],
-        }
-      },
-        methods: {
-      async extraerData() {
-
-        const querySnapshot = await getDocs(collection(db, "adweb-online"));
-        console.log(querySnapshot)
-        querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data().nombre);
-           this.cursos.push(doc.data());
-       });
-       
-       console.log(this.cursos);
-       console.log(this.cursos.img);
-       },
-    //    mostrarCurso(){
-    //        this.cursos.forEach((element)=>{
-
-    //            console.log(element.nombre)
-    //        })
-    //    }
-      },
+    name: "Home-View",
       
     }
     

@@ -10,8 +10,8 @@
             <div class="d-flex ms-auto me-3">
                 <nav>
                     <ul id="list-contenedor" class="d-flex justify-content-around align-items-center">
-                        <router-link class="link-nav px-3" to="">Inicio</router-link>
-                        <router-link class="link-nav px-3" to="/HomeView">Cursos</router-link>
+                        <router-link class="link-nav px-3" to="/HomeView">Inicio</router-link>
+                        <router-link class="link-nav px-3" to="/CoursesView">Cursos</router-link>
                         <router-link class="link-nav px-3" to="/AdminView">Administrador</router-link>
                         <router-link class="link-nav px-3" to="/">Login</router-link>
                         <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal">
