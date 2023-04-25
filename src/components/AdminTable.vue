@@ -205,6 +205,7 @@
 
       .table.table-bordered{
         font-family: 'Montserrat', sans-serif;
+        margin-bottom: 5em;
       }
 
       .modal-content{
