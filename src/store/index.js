@@ -12,6 +12,8 @@ export default createStore({
     mostrarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
     login:false,
     carga: false
+    usuarioConectado:""
+
   },
 
   getters: {
