@@ -87,7 +87,7 @@ export default {
         this.$store.commit(SET_LOGIN_STATE, true);
         this.$router.push({ name: "CoursesView" });
         this.error= "";
-        this.$store.commit.cambiaEstadoLogin();
+        this.$store.commit(cambiaEstadoLogin);
       } catch (err) {
         console.log(err.message);
         this.error = "Usuario o clave incorrecta";
@@ -102,7 +102,7 @@ export default {
         this.showAlert("Usuario registrado correctamente")
         this.$store.commit(SET_LOGIN_STATE, true);
         this.$router.push({ name: "CoursesView" });
-        this.$store.commit.cambiaEstadoLogin();
+        this.$store.commit(cambiaEstadoLogin);
       })
       .catch((error) => {
        
@@ -125,7 +125,7 @@ export default {
       this.showAlert("Sesión iniciada")
       this.$store.commit(SET_LOGIN_STATE, true);
       this.$router.push({ name: "CoursesView" });
-      this.$store.commit.cambiaEstadoLogin();
+      this.$store.commit(cambiaEstadoLogin);
     });
   },
 }
