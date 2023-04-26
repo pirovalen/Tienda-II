@@ -73,7 +73,7 @@ export default {
     };
   },
   methods: {
-...mapMutations(['cambiaEstadoLogin']),
+...mapMutations(['cambiaEstadoLogin', 'cambiaEstadoLoginFalse']),
     async login() {
       try {
         if (!this.$refs.form.checkValidity()) return;
