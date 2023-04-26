@@ -34,7 +34,7 @@
         </div>
         <div class="modal-body">
           ¿Esta seguro que desea salir?
-          <p>{{usuarioConectado}}</p>
+          <p>{{$store.state.usuarioConectado}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-no" data-bs-dismiss="modal">No</button>
@@ -46,11 +46,24 @@
     </template>
         
     <script>
-    // import FormLogin from './FormLogin.vue';
-    // import ShowCards from './ShowCards.vue';
+    import { auth } from "@/auth/auth.service";
+
     export default {
-        name: 'NavBar'
+        name: 'NavBar',
+        
+        methods:{
+            async logout() {
+                try {
+                    await auth.signOut();
+                    this.$store.state.cursos=[]
+                    this.$router.push('/');
+                    this.$store.state.usuarioConectado=''
+                } catch(error){
+                    console.log(error)
+                }
+            }
         }
+    };
     </script>
     <style>
     #login{

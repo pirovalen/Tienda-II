@@ -116,7 +116,6 @@ export default {
   },
   mounted() {
     auth.onAuthStateChanged((user) =>{
-      alert("hola")
       this.$store.state.usuarioConectado=user.email
       this.showAlert("login")
     });
