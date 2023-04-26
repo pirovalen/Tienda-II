@@ -4,8 +4,9 @@
             <div class="me-5">
                 <img src="../assets/logo.png" alt="" width="100">
             </div>
-            <div>                
-            <p class="mb-0">{{$store.state.usuarioConectado}}</p>
+            <div class="d-flex flex-column" v-if="($store.state.login)">
+            <p class="mb-0 ms-4"> ¡Bienvenido!</p>                
+            <p class="mb-0"> {{$store.state.usuarioConectado}}</p>
             </div>
             <!-- <div id="logo">
                 <a v-on:click="HomePage"><img src="../assets/logo.png" alt="" width="250"></a>
@@ -13,9 +14,9 @@
             <div class="d-flex ms-auto me-3">
                 <nav>
                     <ul id="list-contenedor" class="d-flex justify-content-around align-items-center">
-                        <router-link class="link-nav px-3" to="/HomeView">Inicio</router-link>
-                        <router-link class="link-nav px-3" to="/CoursesView">Cursos</router-link>
-                        <router-link class="link-nav px-3" to="/AdminView">Administrador</router-link>
+                        <router-link class="link-nav px-3" to="/HomeView" v-if="($store.state.login)">Inicio</router-link>
+                        <router-link class="link-nav px-3" to="/CoursesView" v-if="($store.state.login)">Cursos</router-link>
+                        <router-link class="link-nav px-3" to="/AdminView" v-if="($store.state.login)">Administrador</router-link>
                         <router-link class="link-nav px-3" to="/" v-if="(!$store.state.login)">Login</router-link>
                         <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="($store.state.login)">
                         Logout
@@ -50,7 +51,7 @@
         
     <script>
 
-    import { mapState } from 'vuex';
+    import { mapState, mapMutations } from 'vuex';
     import { auth } from "@/auth/auth.service";
      
 
@@ -59,13 +60,16 @@
         name: 'NavBar',
          computed:{
         ...mapState(['login']),
+         },
         methods:{
+            ...mapMutations(['cambiaEstadoLoginFalse']),
             async logout() {
                 try {
                     await auth.signOut();
                     this.$store.state.cursos=[]
                     this.$router.push('/');
                     this.$store.state.usuarioConectado=''
+                    this.cambiaEstadoLoginFalse();
                 } catch(error){
                     console.log(error)
                 }
@@ -82,7 +86,7 @@
         list-style-type: none;
         background-color: #82daf0;
         color: azure;
-        padding: 2rem 2rem 2rem 2rem;
+        padding: .5rem 2rem;
         font-size: 16px;
         margin: 0%;
         font-family: 'Montserrat', sans-serif;
