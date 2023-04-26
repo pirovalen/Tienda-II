@@ -18,7 +18,8 @@
                         Logout
                         </button>
                         <!-- <p class="mb-0">{{usuarioConectado}}</p> -->
-                    </ul>
+                        <p class="mb-0">{{$store.state.usuarioConectado}}</p>
+                    </ul>   
                 </nav>
             </div>
         </div>
