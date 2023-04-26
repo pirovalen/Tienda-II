@@ -37,7 +37,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ¿Esta seguro que desea salir?
+          ¿Esta seguro que desea cerrar la sesión?
           <p>{{$store.state.usuarioConectado}}</p>
         </div>
         <div class="modal-footer">
@@ -67,9 +67,10 @@
                 try {
                     await auth.signOut();
                     this.$store.state.cursos=[]
-                    this.$router.push('/');
                     this.$store.state.usuarioConectado=''
                     this.cambiaEstadoLoginFalse();
+                    this.$router.push('/');
+                    
                 } catch(error){
                     console.log(error)
                 }

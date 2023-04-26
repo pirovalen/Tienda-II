@@ -73,14 +73,13 @@ export default {
     };
   },
   methods: {
-...mapMutations(['cambiaEstadoLogin', 'cambiaEstadoLoginFalse']),
+...mapMutations(['cambiaEstadoLoginFalse']),
     async login() {
       try {
         if (!this.$refs.form.checkValidity()) return;
         await auth.signInWithEmailAndPassword(
           this.loginForm.email,
           this.loginForm.password,
-
           this.$store.state.usuarioConectado= this.loginForm.email
         );
 
@@ -88,7 +87,7 @@ export default {
         this.$store.commit(SET_LOGIN_STATE, true);
         this.$router.push({ name: "CoursesView" });
         this.error= "";
-        cambiaEstadoLogin();
+        this.$store.commit.cambiaEstadoLogin();
       } catch (err) {
         console.log(err.message);
         this.error = "Usuario o clave incorrecta";
@@ -98,29 +97,35 @@ export default {
     registrarUsuario (){
       auth.createUserWithEmailAndPassword(this.loginForm.email1,this.loginForm.password1)
         .then((userCredential)=> {
+        
         this.$store.state.usuarioConectado = this.loginForm.email1
-        this.$router.push("/loginView")
+        this.showAlert("Usuario registrado correctamente")
+        this.$store.commit(SET_LOGIN_STATE, true);
+        this.$router.push({ name: "CoursesView" });
+        this.$store.commit.cambiaEstadoLogin();
       })
       .catch((error) => {
+       
         this.$store.state.usuarioConectado='';
         this.codigoError = error.code;
         this.mensajeError = error.message;
       });
     },
-    showAlert(action){
-      if(action==="login"){
+    showAlert(texto1){
         Swal.fire({
-        title:"Sesión iniciada",
+        title:texto1,
         icon:"success",  
         confirmButtonText:"Ok",
         })
-      }
     }
   },
   mounted() {
     auth.onAuthStateChanged((user) =>{
       this.$store.state.usuarioConectado=user.email
-      this.showAlert("login")
+      this.showAlert("Sesión iniciada")
+      this.$store.commit(SET_LOGIN_STATE, true);
+      this.$router.push({ name: "CoursesView" });
+      this.$store.commit.cambiaEstadoLogin();
     });
   },
 }
