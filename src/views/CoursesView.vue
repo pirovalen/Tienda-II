@@ -72,9 +72,24 @@
 
       computed : {
         ...mapState(['cursos'])
-      }
+      },
 
-      
+      showAlert(texto1, texto2){
+        Swal.fire({
+            title:texto1,
+            text: texto2,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        })
+      },
+
+      async mounted(){
+        this.$store.state.cursos=[]
+        if(this.$store.state.usuarioConectado===''){
+            this.showAlert('No hay usuario conectado', 'Debe loguearse')
+            this.$router.push('/login')
+        }
+      }
     }
     
     </script>
