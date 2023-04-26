@@ -32,12 +32,12 @@
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="Email1" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" v-model.trim="loginForm.email1" aria-describedby="emailHelp">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="Password1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" v-model.trim="loginForm.password1">
           </div>
         </form>
       </div>
@@ -47,7 +47,7 @@
           <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div> -->
         <button type="submit" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit">Aceptar</button>
+        <button @click="registrarUsuario()" type="submit" data-bs-dismiss="modal">Aceptar</button>
       </div>
     </div>
   </div>
@@ -56,7 +56,6 @@
 
 <script>
 import { auth } from "@/auth/auth.service";
-// import router from "@/router/index";
 import { SET_LOGIN_STATE } from "@/store/index";
 
 
@@ -66,6 +65,8 @@ export default {
       loginForm: {
         email: "",
         password: "",
+        email1:"",
+        password1:""
       },
       error: "",
     };
@@ -76,23 +77,52 @@ export default {
         if (!this.$refs.form.checkValidity()) return;
         await auth.signInWithEmailAndPassword(
           this.loginForm.email,
-          this.loginForm.password
+          this.loginForm.password,
+
+          this.$store.state.usuarioConectado= this.loginForm.email
         );
+
         console.log("Successfully logged in");
         this.$store.commit(SET_LOGIN_STATE, true);
         this.$router.push({ name: "CoursesView" });
-        this.error= ""
+        this.error= "";
       } catch (err) {
         console.log(err.message);
         this.error = "Usuario o clave incorrecta";
       }
     },
-    async accessToken() {
-      const token = await auth.currentUser?.getIdToken();
-      console.log(token);
+    
+    registrarUsuario (){
+      auth.createUserWithEmailAndPassword(this.loginForm.email1,this.loginForm.password1)
+        .then((userCredential)=> {
+        this.$store.state.usuarioConectado = this.loginForm.email1
+        this.$router.push("/loginView")
+      })
+      .catch((error) => {
+        this.$store.state.usuarioConectado='';
+        this.codigoError = error.code;
+        this.mensajeError = error.message;
+      });
     },
+    showAlert(action){
+      if(action==="login"){
+        Swal.fire({
+        title:"Sesión iniciada",
+        icon:"success",  
+        confirmButtonText:"Ok",
+        })
+      }
+    }
   },
-};
+  mounted() {
+    auth.onAuthStateChanged((user) =>{
+      alert("hola")
+      this.$store.state.usuarioConectado=user.email
+      this.showAlert("login")
+    });
+  },
+}
+
 </script>
 <style>
 #login {

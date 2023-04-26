@@ -12,7 +12,11 @@
       </div>
       <div class="col-2"> 
         <button type="button" class="btn btn-agregar" id="new" data-bs-toggle="modal" data-bs-target="#createModal" >Agregar Curso</button>
+          
       </div>
+    </div>
+    <div>
+      <fade-loader :loading="loading" :color="color" :size="size"></fade-loader>
     </div>
   <div class="row">
       <table class="table table-bordered">
@@ -47,7 +51,8 @@
                   <button class="btn btn-modificar"  id="modificar" @click="getCurso(curso.id)" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button>
                  
               </td>
-              <td><button class="btn btn-modificar" id="borrar" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" @click="idaBorrar(curso.id)">&#128465;</button></td>
+              <!-- <td><button class="btn btn-modificar" id="borrar" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" @click="idaBorrar(curso.id)">&#128465;</button></td> -->
+              <td><button class="btn btn-modificar" id="borrar" type="button" @click="mensajeBorraCurso(curso.id)">&#128465;</button></td>
 
           </tr>
       </tbody>
@@ -56,7 +61,7 @@
   </div>
 
       
-  <!-- Modal edit -->
+  <!-- Modal Editar -->
   <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
@@ -66,7 +71,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="form" @submit.prevent="getCursos(), modificarCurso(mostrarCurso)">
+          <form class="form" @submit.prevent="mensajeEditarCurso()">
             <label for="code-obj" class="form-label">Código</label>
             <input type="text" class="form-control" v-model="mostrarCurso.codigo">
             <label for="name-obj" class="form-label">Nombre</label>
@@ -86,36 +91,17 @@
             <label for="img-obj" class="form-label">Imagen</label>
             <input type="text" class="form-control" v-model="mostrarCurso.img">
             <div class="modal-footer">
-          <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-modificar" data-bs-dismiss="modal">Modificar</button>
-        </div>
+              <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-modificar ms-2 p-2" data-bs-dismiss="modal" >Modificar</button>
+            </div>
           </form>
         </div>
         
       </div>
     </div>
   </div>
-  
-  <!-- Modal delete -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Curso</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-         ¿Estás seguro que deseas eliminar este curso?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-eliminar" data-bs-dismiss="modal" @click="getCursos(), eliminarCurso(idBorrarCurso)">Eliminar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Modal create -->
+  <!-- Modal crear curso -->
   <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
@@ -124,7 +110,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="form" @submit.prevent="getCursos(),crearCurso(agregarCurso),resetearCurso(agregarCurso)">
+          <!-- <form class="form" @submit.prevent="getCursos(),crearCurso(agregarCurso),resetearCurso(agregarCurso)"> -->
+          <form class="form" @submit.prevent="confirmaAgregarCurso()">
             <label for="code-obj" class="form-label" >Código</label>
             <input type="text" class="form-control" v-model="agregarCurso.codigo">
             <label for="name-obj" class="form-label">Nombre</label>
@@ -144,24 +131,26 @@
             <label for="img-obj" class="form-label">Imagen</label>
             <input type="text" class="form-control" v-model="agregarCurso.img">
             <div class="modal-footer">
-              <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-crear" data-bs-dismiss="modal">Crear</button>
+              <button type="button" class="btn btn-cancelar " data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-crear ms-2 py-2" data-bs-dismiss="modal" >Crear</button>
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
-<!--   <button @click="extraerData">click</button>
-  <button @click="mostrarCurso">click</button> -->
   </template>
     
     <script>
-
+    import Swal from 'sweetalert2'
     import {mapActions, mapState} from 'vuex';
-
+    import FadeLoader from 'vue-spinner/src/FadeLoader.vue'
+    
     export default {
       name: 'AdminTable',
+      components: {
+         FadeLoader
+      },  
       data(){
         return{
           agregarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
@@ -175,9 +164,70 @@
         methods: {
           ...mapActions(['getCursos', 'getCurso', 'crearCurso', 'modificarCurso','eliminarCurso']),
 
-          idaBorrar(elemento){
-            this.idBorrarCurso =  elemento
+        // SweetAlert para agregar curso
+
+          confirmaAgregarCurso(){
+            Swal.fire({
+              title: '¿Estás seguro de crear este curso?',
+              showCancelButton: true,
+              confirmButtonText: 'Confirmar',
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                Swal.fire('¡Listo! El curso ha sido creado exitosamente ', '', 'success')
+                this.crearCurso(this.agregarCurso)
+                this.getCursos()
+                this.resetearCurso(this.agregarCurso)
+              } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+              }
+            })
           },
+
+          // SweetAlert para borrar curso
+
+          mensajeBorraCurso(elemento){
+            Swal.fire({
+              title: '¿Estás seguro de borrar este curso?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#f082bf',
+              cancelButtonColor: '#71c3d7',
+              confirmButtonText: 'Si, Borrar'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire(
+                  'Listo!',
+                  'El curso ha sido eliminado exitosamente.',
+                  'success'
+                )
+                this.idBorrarCurso =  elemento;
+                this.eliminarCurso(this.idBorrarCurso);
+                this.getCursos();
+              }
+            })
+          },
+          
+          // SweetAlert para editar curso
+
+          mensajeEditarCurso(){
+            Swal.fire({
+              title: '¿Estás seguro de los cambios realizados?',
+              showCancelButton: true,
+              confirmButtonText: 'Confirmar',
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                Swal.fire('¡Listo! El curso ha sido modificado exitosamente ', '', 'success')
+                this.getCursos() 
+                this.modificarCurso(this.mostrarCurso)
+              } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+              }
+            })
+          },
+
+          // Función para limpiar campos de formulario
 
           resetearCurso(){
             this.agregarCurso =  {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''}
@@ -188,11 +238,12 @@
         computed : {
         ...mapState(['cursos', 'mostrarCurso', 'agregarCurso'])
         },
-      
+        
       }
+
+
     </script>
     
-    <!-- Add "scoped" attribute to limit CSS to this component only -->
     <style>
           
       .container{
@@ -220,6 +271,7 @@
               background-color: #82daf0;
               color: azure;
               font-family: 'Montserrat', sans-serif;
+              margin: 0;
           }
           .btn.btn-crear:hover,.btn.btn-modificar:hover{
               background-color: #71c3d7;
