@@ -78,6 +78,7 @@ export default {
         await auth.signInWithEmailAndPassword(
           this.loginForm.email,
           this.loginForm.password,
+
           this.$store.state.usuarioConectado= this.loginForm.email
         );
 
@@ -92,11 +93,10 @@ export default {
     },
     
     registrarUsuario (){
-  
       auth.createUserWithEmailAndPassword(this.loginForm.email1,this.loginForm.password1)
-    .then((userCredential)=> {
-      this.$store.state.usuarioConectado = this.loginForm.email1
-      this.$router.push("/loginView")
+        .then((userCredential)=> {
+        this.$store.state.usuarioConectado = this.loginForm.email1
+        this.$router.push("/loginView")
       })
       .catch((error) => {
         this.$store.state.usuarioConectado='';
@@ -104,8 +104,24 @@ export default {
         this.mensajeError = error.message;
       });
     },
+    showAlert(action){
+      if(action==="login"){
+        Swal.fire({
+        title:"Sesión iniciada",
+        icon:"success",  
+        confirmButtonText:"Ok",
+        })
+      }
+    }
   },
-};
+  mounted() {
+    auth.onAuthStateChanged((user) =>{
+      alert("hola")
+      this.$store.state.usuarioConectado=user.email
+      this.showAlert("login")
+    });
+  },
+}
 
 </script>
 <style>
