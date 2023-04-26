@@ -28,7 +28,7 @@ export default createStore({
     getCurso(state,payload){
       state.mostrarCurso = payload 
     },
-    cambiaEstadoLogin (state) {1
+    cambiaEstadoLogin (state) {
          state.login = true
     },
     cambiaEstadoLoginFalse (state) {
