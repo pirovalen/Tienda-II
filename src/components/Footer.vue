@@ -12,15 +12,9 @@
     </template>
     
     <script>
-    import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
- 
- new Vue({
-   components: {
-     PulseLoader
-   }
- })
+
     export default {
-    name: 'footer'
+    name: 'footer', 
     }
     </script>
     

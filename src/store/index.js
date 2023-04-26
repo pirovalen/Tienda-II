@@ -10,7 +10,8 @@ export default createStore({
   state: {
     cursos: [],
     mostrarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
-    login:false
+    login:false,
+    carga: false
   },
 
   getters: {

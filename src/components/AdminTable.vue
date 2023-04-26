@@ -15,6 +15,9 @@
           
       </div>
     </div>
+    <div>
+      <fade-loader :loading="loading" :color="color" :size="size"></fade-loader>
+    </div>
   <div class="row">
       <table class="table table-bordered">
       <thead class="table-primary">
@@ -141,10 +144,13 @@
     <script>
     import Swal from 'sweetalert2'
     import {mapActions, mapState} from 'vuex';
-
+    import FadeLoader from 'vue-spinner/src/FadeLoader.vue'
     
     export default {
       name: 'AdminTable',
+      components: {
+         FadeLoader
+      },  
       data(){
         return{
           agregarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
