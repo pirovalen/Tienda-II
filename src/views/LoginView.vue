@@ -78,7 +78,10 @@ export default {
         await auth.signInWithEmailAndPassword(
           this.loginForm.email,
           this.loginForm.password,
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
           this.$store.state.usuarioConectado= this.loginForm.email
         );
 
@@ -93,10 +96,18 @@ export default {
     },
     
     registrarUsuario (){
+<<<<<<< HEAD
       auth.createUserWithEmailAndPassword(this.loginForm.email1,this.loginForm.password1)
         .then((userCredential)=> {
         this.$store.state.usuarioConectado = this.loginForm.email1
         this.$router.push("/loginView")
+=======
+  
+      auth.createUserWithEmailAndPassword(this.loginForm.email1,this.loginForm.password1)
+    .then((userCredential)=> {
+      this.$store.state.usuarioConectado = this.loginForm.email1
+      this.$router.push("/loginView")
+>>>>>>> main
       })
       .catch((error) => {
         this.$store.state.usuarioConectado='';
@@ -114,6 +125,7 @@ export default {
       }
     }
   },
+<<<<<<< HEAD
   mounted() {
     auth.onAuthStateChanged((user) =>{
       alert("hola")
@@ -122,6 +134,9 @@ export default {
     });
   },
 }
+=======
+};
+>>>>>>> main
 
 </script>
 <style>
