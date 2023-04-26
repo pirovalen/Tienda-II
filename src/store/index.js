@@ -11,13 +11,13 @@ export default createStore({
     cursos: [],
     mostrarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
     login:false,
-<<<<<<< HEAD
-    usuarioConectado:""
-=======
-    carga: false
+
+    usuarioConectado:"",
+
+    carga: false,
     usuarioConectado:""
 
->>>>>>> main
+
   },
 
   getters: {
