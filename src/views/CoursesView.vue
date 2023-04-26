@@ -1,15 +1,13 @@
 <template>
     <div class="titulo">
-    <img src="../assets/4529183.jpg" alt="" width="300">
     <h2>Inscribite hoy y aprende desde tu casa</h2>
     </div>
     <div class="subtitulo">
     <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p></div>
     <div class="container mt-5">
-
-        <div class="row gap-5">
-            <!-- <div class="col-sm-3 mb-3 mb-sm-0"> -->
-            <div class="card border-info mb-3" style="width: 18rem;"  v-for="curso in cursos" :key="curso.nombre">
+        <div class="row">
+            <div class="col-lg-4 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
+            <div class=" card border-info mb-3 mx-auto" style="width: 18rem;"  >
                 <img :src= "curso.img" class="card-img-top" alt="img">
                 <div class="card-body">
                     <h5 class="card-title">{{curso.nombre}}</h5>
@@ -18,12 +16,11 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Duración: {{curso.duracion  }}</li>
                     <li class="list-group-item">Cupos: {{curso.cupos }}</li>
-                    <li class="list-group-item">Precio: ${{ curso.precio }}</li>
-
+                    <li class="list-group-item">Precio: $ {{new Intl.NumberFormat('ES', {style: 'currency', currency: 'clp' }).format(curso.precio)}}</li>
                 </ul>
-            <!-- </div> -->
             </div>
         </div>
+    </div>
     </div>
 </template>
     
