@@ -1,8 +1,11 @@
 <template> 
     <div class="navbar">
         <div class="container-fluid d-flex align-items-center">
-            <div>
+            <div class="me-5">
                 <img src="../assets/logo.png" alt="" width="100">
+            </div>
+            <div>                
+            <p class="mb-0">{{$store.state.usuarioConectado}}</p>
             </div>
             <!-- <div id="logo">
                 <a v-on:click="HomePage"><img src="../assets/logo.png" alt="" width="250"></a>
@@ -13,12 +16,12 @@
                         <router-link class="link-nav px-3" to="/HomeView">Inicio</router-link>
                         <router-link class="link-nav px-3" to="/CoursesView">Cursos</router-link>
                         <router-link class="link-nav px-3" to="/AdminView">Administrador</router-link>
-                        <router-link class="link-nav px-3" to="/">Login</router-link>
-                        <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <router-link class="link-nav px-3" to="/" v-if="(!$store.state.login)">Login</router-link>
+                        <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="($store.state.login)">
                         Logout
                         </button>
                         <!-- <p class="mb-0">{{usuarioConectado}}</p> -->
-                        <p class="mb-0">{{$store.state.usuarioConectado}}</p>
+                    
                     </ul>   
                 </nav>
             </div>
@@ -34,7 +37,7 @@
         </div>
         <div class="modal-body">
           ¿Esta seguro que desea salir?
-          <p>{{usuarioConectado}}</p>
+          <p>{{$store.state.usuarioConectado}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-no" data-bs-dismiss="modal">No</button>
@@ -46,11 +49,30 @@
     </template>
         
     <script>
-    // import FormLogin from './FormLogin.vue';
-    // import ShowCards from './ShowCards.vue';
+
+    import { mapState } from 'vuex';
+    import { auth } from "@/auth/auth.service";
+     
+
+   
     export default {
-        name: 'NavBar'
+        name: 'NavBar',
+         computed:{
+        ...mapState(['login']),
+        methods:{
+            async logout() {
+                try {
+                    await auth.signOut();
+                    this.$store.state.cursos=[]
+                    this.$router.push('/');
+                    this.$store.state.usuarioConectado=''
+                } catch(error){
+                    console.log(error)
+                }
+            }
         }
+    };
+
     </script>
     <style>
     #login{

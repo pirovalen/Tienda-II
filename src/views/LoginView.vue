@@ -57,6 +57,7 @@
 <script>
 import { auth } from "@/auth/auth.service";
 import { SET_LOGIN_STATE } from "@/store/index";
+import {mapMutations, mapState} from 'vuex';
 
 
 export default {
@@ -72,6 +73,7 @@ export default {
     };
   },
   methods: {
+...mapMutations(['cambiaEstadoLogin']),
     async login() {
       try {
         if (!this.$refs.form.checkValidity()) return;
@@ -86,6 +88,7 @@ export default {
         this.$store.commit(SET_LOGIN_STATE, true);
         this.$router.push({ name: "CoursesView" });
         this.error= "";
+        cambiaEstadoLogin();
       } catch (err) {
         console.log(err.message);
         this.error = "Usuario o clave incorrecta";
@@ -116,7 +119,6 @@ export default {
   },
   mounted() {
     auth.onAuthStateChanged((user) =>{
-      alert("hola")
       this.$store.state.usuarioConectado=user.email
       this.showAlert("login")
     });

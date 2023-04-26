@@ -13,11 +13,7 @@ export default createStore({
     login:false,
 
     usuarioConectado:"",
-
     carga: false,
-    usuarioConectado:""
-
-
   },
 
   getters: {
@@ -33,6 +29,10 @@ export default createStore({
     getCurso(state,payload){
       state.mostrarCurso = payload 
     },
+
+    cambiaEstadoLogin (state) {
+      state.login = true
+    }
 
   },
 
