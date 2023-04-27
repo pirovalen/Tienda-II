@@ -5,7 +5,12 @@
     <div class="subtitulo">
     <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p></div>
     <div class="container mt-5">
-        <div class="row">
+        <div class="row justify-content-center py-5" v-if="($store.state.cursos.length) == 0">
+      <div class="col-auto">
+      <fade-loader :loading="loading" :color="color" :size="size" class="mb-5"></fade-loader>
+    </div>
+    </div>
+        <div class="row" v-else>
             <div class="col-lg-4 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
             <div class=" card border-info mb-3 mx-auto" style="width: 18rem;"  >
                 <img :src= "curso.img" class="card-img-top" alt="img">
@@ -27,8 +32,7 @@
     
     <script>
     // @ is an alias to /src
-    import NavBar from '../components/NavBar.vue'
-    import Footer from '../components/Footer.vue'
+    import FadeLoader from 'vue-spinner/src/FadeLoader.vue'
 
     // import { collection, getDocs } from "firebase/firestore";
     // import { db } from "@/auth/auth.service";
@@ -36,14 +40,16 @@
 
     export default {
     name: "Home-View",
-    // mounted(){
-    //     this.extraerData()
-    // },
-    //     data() {
-    //     return {
-    //       cursos: [],
-    //     }
-    //   },
+    data() {
+        return {
+        color:'#d676ab'
+    }
+    },
+
+    components: {
+         FadeLoader
+      }, 
+
         created(){
             this.getCursos()
         },
