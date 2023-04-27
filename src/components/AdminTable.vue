@@ -3,6 +3,12 @@
   <div class="row">
   <h2 class="titulo">Administrador de Cursos</h2>
   </div>
+  <div class="row justify-content-center py-5" v-if="($store.state.cursos.length) == 0">
+      <div class="col-auto">
+      <fade-loader :loading="loading" :color="color" :size="size" class="mb-5"></fade-loader>
+    </div>
+    </div>
+    <div v-else>
   <div class="row justify-content-between py-4" id="searchContainer">
       <div id="search"  class="col-8" style="display: flex;">
         <input id="input-search" class="w-100 mx-2"  type="text" placeholder="Ingrese su búsqueda" >
@@ -15,11 +21,9 @@
           
       </div>
     </div>
-    <div>
-      <fade-loader :loading="loading" :color="color" :size="size"></fade-loader>
-    </div>
-  <div class="row">
-      <table class="table table-bordered">
+    <div class="contenedorTabla">
+
+      <table class="table table-bordered align-middle">
       <thead class="table-primary">
           <tr>
               <th scope="col">Código</th>
@@ -38,27 +42,29 @@
 
       <TBody>
           <tr v-for="curso in cursos" :key="curso.nombre">
-              <td>{{curso.id}}</td>
-              <td>{{curso.nombre}}</td>
-              <td>{{curso.estado}}</td>
-              <td>{{curso.precio}}</td>
-              <td>{{curso.duracion}}</td>
-              <td>{{curso.descripcion}}</td>
-              <td>{{curso.cupos}}</td>
-              <td>{{curso.inscritos}}</td>
-              <td>{{curso.img}}</td>
-              <td>
+              <td  class="text-center">{{curso.id}}</td>
+              <td  class="text-center">{{curso.nombre}}</td>
+              <td  class="text-center">{{curso.estado}}</td>
+              <td  class="text-center">{{curso.precio}}</td>
+              <td  class="text-center">{{curso.duracion}}</td>
+              <td  class="text-center">{{curso.descripcion}}</td>
+              <td  class="text-center">{{curso.cupos}}</td>
+              <td  class="text-center">{{curso.inscritos}}</td>
+              <td  class="text-center" id="linkImagen">{{curso.img}}</td>
+              <td class="text-center">
                   <button class="btn btn-modificar"  id="modificar" @click="getCurso(curso.id)" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button>
                  
               </td>
-              <!-- <td><button class="btn btn-modificar" id="borrar" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" @click="idaBorrar(curso.id)">&#128465;</button></td> -->
-              <td><button class="btn btn-modificar" id="borrar" type="button" @click="mensajeBorraCurso(curso.id)">&#128465;</button></td>
+              <td class="text-center"><button class="btn btn-modificar" id="borrar" type="button" @click="mensajeBorraCurso(curso.id)">&#128465;</button></td>
 
           </tr>
       </tbody>
       </table>
+    </div>
+    </div>
+
   </div>
-  </div>
+
 
       
   <!-- Modal Editar -->
@@ -154,7 +160,9 @@
       data(){
         return{
           agregarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
-          idBorrarCurso: ''
+          idBorrarCurso: '',
+          color: '#d676ab'
+    
         }
       },
       created(){
@@ -257,6 +265,15 @@
       .table.table-bordered{
         font-family: 'Montserrat', sans-serif;
         margin-bottom: 5em;
+      }
+      .contenedorTabla{
+        max-width: 99vw;
+      }
+
+      #linkImagen {
+        max-width: 5em;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
       }
 
       .modal-content{
