@@ -12,10 +12,15 @@ export default createStore({
     mostrarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
     login:false,
     usuarioConectado:"",
-    carga: false,
+    carga: false
   },
 
   getters: {
+
+    loginTrue(state) {
+      return state.login;
+    }
+
   },
 
   mutations: {
@@ -28,8 +33,8 @@ export default createStore({
     getCurso(state,payload){
       state.mostrarCurso = payload 
     },
-    cambiaEstadoLogin (state) {1
-         state.login = true
+    cambiaEstadoLogin (state) {
+      state.login = true
     },
     cambiaEstadoLoginFalse (state) {
       state.login = false

@@ -4,7 +4,7 @@
             <div class="me-5">
                 <img src="../assets/logo.png" alt="" width="100">
             </div>
-            <div class="d-flex flex-column" v-if="($store.state.login)">
+            <div class="d-flex flex-column" v-if="(loginTrue)">
             <p class="mb-0 ms-4"> ¡Bienvenido!</p>                
             <p class="mb-0"> {{$store.state.usuarioConectado}}</p>
             </div>
@@ -14,11 +14,11 @@
             <div class="d-flex ms-auto me-3">
                 <nav>
                     <ul id="list-contenedor" class="d-flex justify-content-around align-items-center">
-                        <router-link class="link-nav px-3" to="/HomeView" v-if="($store.state.login)">Inicio</router-link>
-                        <router-link class="link-nav px-3" to="/CoursesView" v-if="($store.state.login)">Cursos</router-link>
-                        <router-link class="link-nav px-3" to="/AdminView" v-if="($store.state.login)">Administrador</router-link>
-                        <router-link class="link-nav px-3" to="/" v-if="(!$store.state.login)">Login</router-link>
-                        <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="($store.state.login)">
+                        <router-link class="link-nav px-3" to="/HomeView" v-if="(loginTrue)">Inicio</router-link>
+                        <router-link class="link-nav px-3" to="/CoursesView" v-if="(loginTrue)">Cursos</router-link>
+                        <router-link class="link-nav px-3" to="/AdminView" v-if="(loginTrue)">Administrador</router-link>
+                        <router-link class="link-nav px-3" to="/" v-if="(!loginTrue)">Login</router-link>
+                        <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="(loginTrue)">
                         Logout
                         </button>
                         <!-- <p class="mb-0">{{usuarioConectado}}</p> -->
@@ -51,7 +51,7 @@
         
     <script>
 
-    import { mapState, mapMutations } from 'vuex';
+    import { mapGetters, mapMutations } from 'vuex';
     import { auth } from "@/auth/auth.service";
      
 
@@ -59,7 +59,7 @@
     export default {
         name: 'NavBar',
          computed:{
-        ...mapState(['login']),
+        ...mapGetters(['loginTrue']),
          },
         methods:{
             ...mapMutations(['cambiaEstadoLoginFalse']),
