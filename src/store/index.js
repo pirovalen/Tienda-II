@@ -10,10 +10,17 @@ export default createStore({
   state: {
     cursos: [],
     mostrarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
-    login:false
+    login:false,
+    usuarioConectado:"",
+    carga: false
   },
 
   getters: {
+
+    loginTrue(state) {
+      return state.login;
+    }
+
   },
 
   mutations: {
@@ -26,11 +33,20 @@ export default createStore({
     getCurso(state,payload){
       state.mostrarCurso = payload 
     },
+    cambiaEstadoLogin (state) {
+      state.login = true
+    },
+    cambiaEstadoLoginFalse (state) {
+      state.login = false
+    }
 
   },
 
 
   actions: {
+
+    // CRUD -> READ 
+
     async getCursos ({commit}){
       const cursos = [];
       const listado = await getDocs(collection(db, "adweb-online"))
@@ -43,6 +59,8 @@ export default createStore({
           });
           commit('getCursos', cursos)
     },
+
+    // Obtiene datos del curso seleccionado 
 
     async getCurso ({commit}, idCurso){
       const datosCurso = await getDoc(doc(db, "adweb-online", idCurso));
@@ -59,6 +77,8 @@ export default createStore({
       commit('getCurso', curso)
       },
 
+      // CRUD -> UPDATE 
+
     async modificarCurso({commit}, mostrarCurso){
       await setDoc(doc(db, "adweb-online", mostrarCurso.codigo), {
         codigo: mostrarCurso.codigo,
@@ -72,6 +92,8 @@ export default createStore({
         img: mostrarCurso.img
       });
     },
+
+    // CRUD -> CREATE 
 
     async crearCurso({commit}, agregarCurso){
       await setDoc(doc(db, "adweb-online", agregarCurso.codigo), {
@@ -88,11 +110,12 @@ export default createStore({
       agregarCurso = '';
     },
 
+    // CRUD -> DELETE 
+
     async eliminarCurso({commit}, idBorrar){
       console.log("borrarDatooos")
       await deleteDoc(doc(db,"adweb-online", idBorrar))
     }
-
   },
 
   modules: {

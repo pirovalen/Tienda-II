@@ -10,8 +10,14 @@
     "bootstrap": "^5.2.3",
     "core-js": "^3.8.3",
     "firebase": "^9.20.0",
+<<<<<<< HEAD
     "vue": "^3.2.47",
+=======
+    "sweetalert2": "^11.7.3",
+    "vue": "^3.2.13",
+>>>>>>> ed99bae6f8e02a29ccc1238453312fbbc5b02fde
     "vue-router": "^4.0.3",
+    "vue-spinner": "^1.0.4",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

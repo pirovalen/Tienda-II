@@ -1,8 +1,12 @@
 <template> 
     <div class="navbar">
         <div class="container-fluid d-flex align-items-center">
-            <div>
+            <div class="me-5">
                 <img src="../assets/logo.png" alt="" width="100">
+            </div>
+            <div class="d-flex flex-column" v-if="(loginTrue)">
+            <p class="mb-0 ms-4"> ¡Bienvenido!</p>                
+            <p class="mb-0"> {{$store.state.usuarioConectado}}</p>
             </div>
             <!-- <div id="logo">
                 <a v-on:click="HomePage"><img src="../assets/logo.png" alt="" width="250"></a>
@@ -10,15 +14,16 @@
             <div class="d-flex ms-auto me-3">
                 <nav>
                     <ul id="list-contenedor" class="d-flex justify-content-around align-items-center">
-                        <router-link class="link-nav px-3" to="/HomeView">Inicio</router-link>
-                        <router-link class="link-nav px-3" to="/CoursesView">Cursos</router-link>
-                        <router-link class="link-nav px-3" to="/AdminView">Administrador</router-link>
-                        <router-link class="link-nav px-3" to="/">Login</router-link>
-                        <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <router-link class="link-nav px-3" to="/HomeView" v-if="(loginTrue)">Inicio</router-link>
+                        <router-link class="link-nav px-3" to="/CoursesView" v-if="(loginTrue)">Cursos</router-link>
+                        <router-link class="link-nav px-3" to="/AdminView" v-if="(loginTrue)">Administrador</router-link>
+                        <router-link class="link-nav px-3" to="/" v-if="(!loginTrue)">Login</router-link>
+                        <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="(loginTrue)">
                         Logout
                         </button>
                         <!-- <p class="mb-0">{{usuarioConectado}}</p> -->
-                    </ul>
+                    
+                    </ul>   
                 </nav>
             </div>
         </div>
@@ -32,8 +37,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ¿Esta seguro que desea salir?
-          <p>{{usuarioConectado}}</p>
+          ¿Esta seguro que desea cerrar la sesión?
+          <p>{{$store.state.usuarioConectado}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-no" data-bs-dismiss="modal">No</button>
@@ -45,11 +50,34 @@
     </template>
         
     <script>
-    // import FormLogin from './FormLogin.vue';
-    // import ShowCards from './ShowCards.vue';
+
+    import { mapGetters, mapMutations } from 'vuex';
+    import { auth } from "@/auth/auth.service";
+     
+
+   
     export default {
-        name: 'NavBar'
+        name: 'NavBar',
+         computed:{
+        ...mapGetters(['loginTrue']),
+         },
+        methods:{
+            ...mapMutations(['cambiaEstadoLoginFalse']),
+            async logout() {
+                try {
+                    await auth.signOut();
+                    this.$store.state.cursos=[]
+                    this.$store.state.usuarioConectado=''
+                    this.cambiaEstadoLoginFalse();
+                    this.$router.push('/');
+                    
+                } catch(error){
+                    console.log(error)
+                }
+            }
         }
+    };
+
     </script>
     <style>
     #login{
@@ -59,7 +87,7 @@
         list-style-type: none;
         background-color: #82daf0;
         color: azure;
-        padding: 2rem 2rem 2rem 2rem;
+        padding: .5rem 2rem;
         font-size: 16px;
         margin: 0%;
         font-family: 'Montserrat', sans-serif;
