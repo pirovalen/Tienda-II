@@ -12,8 +12,8 @@
       <button type="submit">Iniciar Sesión</button>
       <br /><br />
       <div id="login" class="mt-2"> 
-        <h5>¿No tienes cuenta?</h5>
-        <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Regístrate!</button>
+        <p>¿No tienes cuenta?</p>
+        <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="btnRegistro">Regístrate!</button>
       <!-- <button @click="accessToken()">Access Token</button> -->
       </div>
     </form>
@@ -41,13 +41,9 @@
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <!-- <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div> -->
-        <button type="submit" data-bs-dismiss="modal">Cerrar</button>
+      <div class="modal-footer justify-content-center">
         <button @click="registrarUsuario()" type="submit" data-bs-dismiss="modal">Aceptar</button>
+        <button type="submit" data-bs-dismiss="modal" id="cerrarModalRegistro">Cerrar</button>
       </div>
     </div>
   </div>
@@ -57,7 +53,7 @@
 <script>
 import { auth } from "@/auth/auth.service";
 import { SET_LOGIN_STATE } from "@/store/index";
-import {mapMutations, mapState} from 'vuex';
+import {mapMutations} from 'vuex';
 
 
 export default {
@@ -96,8 +92,7 @@ export default {
     
     registrarUsuario (){
       auth.createUserWithEmailAndPassword(this.loginForm.email1,this.loginForm.password1)
-        .then((userCredential)=> {
-        
+        .then((userCredential)=> {     
         this.$store.state.usuarioConectado = this.loginForm.email1
         this.showAlert("Usuario registrado correctamente")
         this.$store.commit(SET_LOGIN_STATE, true);
@@ -160,16 +155,29 @@ export default {
   outline: none;
 }
 button[type="submit"] {
-  margin-top: 1rem;
-  margin-right: 1rem;
+  margin-top: 1.5em;
   padding: 10px 20px;
-  background-color: #F57ED2;
+  background-color: #f082bf;
   border: none;
   color: #fff;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  width: 15em;
+  letter-spacing: 2px;
 }
+
+#btnRegistro, #cerrarModalRegistro{
+  background-color: white;
+  color: black;
+  border: 2px solid #f082bf;
+  margin: 0 0 2em 0;
+}
+
+#cerrarModalRegistro{
+  margin-top: 1em;
+}
+
 button[type="submit"]:hover {
   background-color: #82daf0;
 }
