@@ -26,17 +26,17 @@
       <table class="table table-bordered align-middle">
       <thead class="table-primary">
           <tr>
-              <th scope="col">Código</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Duración</th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Cupos</th>
-              <th scope="col">Inscritos</th>
-              <th scope="col">IMG</th>
-              <th scope="col">Modificar</th>
-              <th scope="col">Eliminar</th>
+              <th scope="col" class="text-center">Código</th>
+              <th scope="col" class="text-center">Nombre</th>
+              <th scope="col" class="text-center">Descripción</th>
+              <th scope="col" class="text-center">Duración</th>
+              <th scope="col" class="text-center">Precio</th>
+              <th scope="col" class="text-center">Cupos</th>
+              <th scope="col" class="text-center">Inscritos</th>
+              <th scope="col" class="text-center">Imagen</th>
+              <th scope="col" class="text-center">Estado</th>
+              <th scope="col" class="text-center">Modificar</th>
+              <th scope="col" class="text-center">Eliminar</th>
           </tr>
       </thead>
 
@@ -44,16 +44,17 @@
           <tr v-for="curso in cursos" :key="curso.nombre">
               <td  class="text-center">{{curso.id}}</td>
               <td  class="text-center">{{curso.nombre}}</td>
-              <td  class="text-center">{{curso.estado}}</td>
-              <td  class="text-center">{{curso.precio}}</td>
-              <td  class="text-center">{{curso.duracion}}</td>
               <td  class="text-center">{{curso.descripcion}}</td>
+              <td  class="text-center">{{curso.duracion}}</td>
+              <td  class="text-center">$ {{new Intl.NumberFormat('ES', {style: 'currency', currency: 'clp' }).format(curso.precio)}}</td>
               <td  class="text-center">{{curso.cupos}}</td>
               <td  class="text-center">{{curso.inscritos}}</td>
-              <td  class="text-center" id="linkImagen">{{curso.img}}</td>
+              <td  class="text-center" > 
+                <img :src= "curso.img" id="card-img-top" alt="img">
+              </td>
+              <td  class="text-center">{{curso.estado}}</td>
               <td class="text-center">
                   <button class="btn btn-modificar"  id="modificar" @click="getCurso(curso.id)" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button>
-                 
               </td>
               <td class="text-center"><button class="btn btn-modificar" id="borrar" type="button" @click="mensajeBorraCurso(curso.id)">&#128465;</button></td>
 
@@ -253,7 +254,12 @@
     </script>
     
     <style>
-          
+      
+      #card-img-top{
+        max-width: 8rem;
+        height: 60px;
+        }
+
       .container{
         font-family: 'Montserrat', sans-serif;
       }
@@ -268,12 +274,6 @@
       }
       .contenedorTabla{
         max-width: 99vw;
-      }
-
-      #linkImagen {
-        max-width: 5em;
-        overflow-x: hidden;
-        text-overflow: ellipsis;
       }
 
       .modal-content{
