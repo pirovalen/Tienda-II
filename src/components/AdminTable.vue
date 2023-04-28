@@ -285,32 +285,43 @@
       }
 
       .btn.btn-crear,.btn.btn-modificar{
-              background-color: #82daf0;
+              background-color: #D2AFFF;
               color: azure;
               font-family: 'Montserrat', sans-serif;
               margin: 0;
           }
           .btn.btn-crear:hover,.btn.btn-modificar:hover{
-              background-color: #71c3d7;
+              background-color: #f2b119;
               color: azure;
           }
           .btn.btn-cancelar,.btn.btn-agregar,.btn.btn-buscar{
-              background-color: #f082bf;
+              background-color: #D2AFFF;
               color: azure;
               font-family: 'Montserrat', sans-serif;
           }
+
+          .btn.btn-agregar{
+              background-color: #f2b119;
+              color: azure;
+              font-family: 'Montserrat', sans-serif;
+          }
+
           .btn.btn-cancelar:hover,.btn.btn-agregar:hover,.btn.btn-buscar:hover{
-              background-color: #d676ab;
+              background-color: #f2b119;
+              color: azure;
+          }
+
+          .btn.btn-agregar:hover{
+              background-color: #f3c65c;
               color: azure;
           }
 
           .btn.btn-eliminar{
-              background-color: #964a74;
+              background-color: #f2b119;
               color: azure;
           }
           .btn.btn-eliminar:hover{
-              background-color: #693a54;
+              background-color: #f2b119;
               color: azure;
           }
-
     </style>
