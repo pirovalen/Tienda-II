@@ -157,7 +157,7 @@ export default {
 button[type="submit"] {
   margin-top: 1.5em;
   padding: 10px 20px;
-  background-color: #f082bf;
+  background-color: #F2B119;
   border: none;
   color: #fff;
   border-radius: 5px;
@@ -170,7 +170,7 @@ button[type="submit"] {
 #btnRegistro, #cerrarModalRegistro{
   background-color: white;
   color: black;
-  border: 2px solid #f082bf;
+  border: 2px solid #F2B119;
   margin: 0 0 2em 0;
 }
 
@@ -179,6 +179,6 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #82daf0;
+  background-color: #8B82B7;
 }
 </style>
