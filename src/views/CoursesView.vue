@@ -11,7 +11,7 @@
     </div>
     </div>
         <div class="row" v-else>
-            <div class="col-lg-4 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
+            <div class="col-lg-4  col-md-6 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
             <div class=" card border mb-3 mx-auto" style="width: 18rem;"  >
                 <img :src= "curso.img" class="card-img-top" alt="img">
                 <div class="card-body">
@@ -108,24 +108,6 @@
         padding-top: 7rem;
         }
 
-        .btn--ver{
-        background-color: #D2AFFF;
-        border-radius: 8px;
-        border-style: none;
-        box-sizing: border-box;
-        color: #FFFFFF;
-        cursor: pointer;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 500;
-        height: 40px;
-        line-height: 20px;
-        margin-top: auto;
-        text-align: center;
-        transition: color 100ms;
-        touch-action: manipulation;
-        font-family: 'Montserrat', sans-serif;
-        }
 
         .btnInscribir {
             background-color: #8B82B7;
@@ -136,7 +118,7 @@
         }
 
          .btnInscribir:hover{
-            background-color: #bd9ce9;
+            background-color: #F2B119;
         } 
 
         .btnDisabled{
