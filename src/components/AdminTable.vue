@@ -8,22 +8,20 @@
       <fade-loader :loading="loading" :color="color" :size="size" class="mb-5"></fade-loader>
     </div>
     </div>
-    <div v-else>
-  <div class="row justify-content-between py-4" id="searchContainer">
+    <div  v-else>
+  <div class="row justify-content-center py-4" id="searchContainer">
       <div id="search"  class="col-8" style="display: flex;">
-        <input id="input-search" class="w-100 mx-2"  type="text" placeholder="Ingrese su búsqueda" >
+        <input id="input-search" class="w-100 me-2"  type="text" placeholder="Ingrese su búsqueda" >
         <button id="buttonSearch" class="btn btn-buscar" >
           <i class="fa fa-search"></i> Buscar
         </button>
       </div>
-      <div class="col-2"> 
+      <div class="col-2" style="display: flex;"> 
         <button type="button" class="btn btn-agregar" id="new" data-bs-toggle="modal" data-bs-target="#createModal" >Agregar Curso</button>
-          
       </div>
     </div>
-    <div class="contenedorTabla">
-
-      <table class="table table-bordered align-middle">
+    <div class=" table-responsive contenedorTabla">
+      <table class="table table-bordered table-hover align-middle">
       <thead class="table-primary">
           <tr>
               <th scope="col" class="text-center">Código</th>
@@ -285,32 +283,43 @@
       }
 
       .btn.btn-crear,.btn.btn-modificar{
-              background-color: #82daf0;
+              background-color: #D2AFFF;
               color: azure;
               font-family: 'Montserrat', sans-serif;
               margin: 0;
           }
           .btn.btn-crear:hover,.btn.btn-modificar:hover{
-              background-color: #71c3d7;
+              background-color: #f2b119;
               color: azure;
           }
           .btn.btn-cancelar,.btn.btn-agregar,.btn.btn-buscar{
-              background-color: #f082bf;
+              background-color: #D2AFFF;
               color: azure;
               font-family: 'Montserrat', sans-serif;
           }
+
+          .btn.btn-agregar{
+              background-color: #f2b119;
+              color: azure;
+              font-family: 'Montserrat', sans-serif;
+          }
+
           .btn.btn-cancelar:hover,.btn.btn-agregar:hover,.btn.btn-buscar:hover{
-              background-color: #d676ab;
+              background-color: #f2b119;
+              color: azure;
+          }
+
+          .btn.btn-agregar:hover{
+              background-color: #f3c65c;
               color: azure;
           }
 
           .btn.btn-eliminar{
-              background-color: #964a74;
+              background-color: #f2b119;
               color: azure;
           }
           .btn.btn-eliminar:hover{
-              background-color: #693a54;
+              background-color: #f2b119;
               color: azure;
           }
-
     </style>

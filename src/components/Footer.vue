@@ -20,7 +20,7 @@
     
     <style>
     footer {
-    background-color: #82daf0;
+    background-color: #8B82B7;
 /*     margin-top: 5em; */
     padding: 50px;
     text-align: center;

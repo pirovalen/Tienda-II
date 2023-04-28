@@ -1,5 +1,8 @@
 <template> 
-    <div class="navbar">
+    <nav class="navbar">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
         <div class="container-fluid d-flex align-items-center">
             <div class="me-5">
                 <img src="../assets/logo.png" alt="" width="100">
@@ -12,7 +15,7 @@
                 <a v-on:click="HomePage"><img src="../assets/logo.png" alt="" width="250"></a>
             </div> -->
             <div class="d-flex ms-auto me-3">
-                <nav>
+                    <div class="collapse navbar-collapse" id="navbarNav">
                     <ul id="list-contenedor" class="d-flex justify-content-around align-items-center">
                         <router-link class="link-nav px-3" to="/" v-if="(loginTrue)">Inicio</router-link>
                         <router-link class="link-nav px-3" to="/CoursesView" v-if="(loginTrue)">Cursos</router-link>
@@ -22,12 +25,11 @@
                         Logout
                         </button>
                         <!-- <p class="mb-0">{{usuarioConectado}}</p> -->
-                    
                     </ul>   
-                </nav>
             </div>
         </div>
-    </div>
+    </div>  
+</nav>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -85,7 +87,7 @@
     }
     .navbar{
         list-style-type: none;
-        background-color: #82daf0;
+        background-color: #8B82B7;
         color: azure;
         padding: .5rem 2rem;
         font-size: 16px;
@@ -98,7 +100,7 @@
         transition: all 0.5s ease;
     }
     .link-nav:hover{
-        color: #F57ED2;
+        color: #F2B119;
         transform: scale(1.2);
     }
     .list-item{
@@ -109,7 +111,7 @@
         color: azure;
         border: none;
         transition: all 0.5s ease;
-        background-color: #F57ED2;
+        background-color: #F2B119;
     }
     .btn-logout:hover{
         transform: scale(1.2);
