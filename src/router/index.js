@@ -6,14 +6,14 @@ import CoursesView from '../views/CoursesView.vue'
 
 const routes = [
   {
-    path: "/",
-    name: "LoginView",
-    component:LoginView
-  },
-  {
-    path: '/HomeView',
+    path: '/',
     name: 'Home',
     component: HomeView
+  },
+  { path: "/LoginView",
+    name: "LoginView",
+    component:LoginView
+    
   },
   {
     path: '/AdminView',
