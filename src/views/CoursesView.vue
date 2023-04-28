@@ -23,7 +23,7 @@
                     <li class="list-group-item">Cupos: {{curso.cupos }}</li>
                     <li class="list-group-item">Precio: $ {{new Intl.NumberFormat('ES', {style: 'currency', currency: 'clp' }).format(curso.precio)}}</li>
                 </ul>
-                <button class=" btnInscribir p-2">Inscribirme</button>
+                <button :class = " curso.estado === 'true' ? 'btnInscribir' : 'btnDisabled'" :disabled="curso.estado === 'false' ">{{curso.estado === 'true' ? 'Inscribirme' : 'No disponible' }}</button>
             </div>
         </div>
     </div>
@@ -128,15 +128,23 @@
         }
 
         .btnInscribir {
-            background-color: #D2AFFF;
+            background-color: #8B82B7;
             color: white;
-            border: 1px solid #D2AFFF;
+            border: 1px solid #8B82B7;
             letter-spacing: 3px;
+            padding: .6em 0;
         }
 
-        .btnInscribir:hover{
+         .btnInscribir:hover{
             background-color: #bd9ce9;
-        }
+        } 
 
+        .btnDisabled{
+            background-color: #dadada;
+            letter-spacing: 3px;
+            color: rgb(70, 70, 70); 
+            border: 1px solid #D2AFFF;
+            padding: .6em 0;
+        }
 
     </style>
