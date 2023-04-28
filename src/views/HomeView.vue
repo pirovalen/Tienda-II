@@ -6,23 +6,23 @@
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="../assets/3.jpeg" class="d-block w-100" alt="">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Aprende hoy</h5>
-        <p>Los mejores cursos para ti</p>
+    <div class="carousel-item active align-middle h-50">
+      <img src="../assets/home1.png" class="h-100" alt="">
+      <div class="carousel-caption d-none d-md-block align-middle">
+        <h5>Aprendizaje Colaborativo</h5>
+        <p>mejora tu aprendizaje trabajando en equipo</p>
       </div>
     </div>
-    <div class="carousel-item">
-      <img src="../assets/2.jpeg" class="d-block w-100" alt="">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Aprende hoy</h5>
-        <p>Los mejores cursos para ti</p>
+    <div class="carousel-item align-middle h-50">
+      <img src="../assets/home2.png" class="h-100" alt="">
+      <div class="carousel-caption d-none d-md-block align-middle">
+        <h5>Cursos Online</h5>
+        <p>Aprende rápido y desde la comodidad de tu hogar</p>
       </div>
     </div>
-    <div class="carousel-item">
-      <img src="../assets/4.jpeg" class="d-block w-100" alt="">
-      <div class="carousel-caption d-none d-md-block">
+    <div class="carousel-item align-middle h-50">
+      <img src="../assets/home3.png" class="h-100" alt="">
+      <div class="carousel-caption d-none d-md-block align-middle">
         <h5>Aprende hoy</h5>
         <p>Los mejores cursos para ti</p>
       </div>
