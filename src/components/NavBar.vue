@@ -117,19 +117,19 @@
         transform: scale(1.2);
     }
     .btn.btn-no{
-        background-color: #82daf0;
+        background-color: #8B82B7;
         color: azure;
     }
     .btn.btn-no:hover{
-        background-color: #71c3d7;
+        background-color: #8B82B7;
         color: azure;
     }
     .btn.btn-si{
-        background-color: #f082bf;
+        background-color: #F2B119;
         color: azure;
     }
     .btn.btn-si:hover{
-        background-color: #d676ab;
+        background-color: #F2B119;
         color: azure;
     }
     #exampleModal{
