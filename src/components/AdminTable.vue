@@ -283,7 +283,7 @@
       }
 
       .btn.btn-crear,.btn.btn-modificar{
-              background-color: #D2AFFF;
+              background-color: #8B82B7;
               color: azure;
               font-family: 'Montserrat', sans-serif;
               margin: 0;
@@ -293,7 +293,7 @@
               color: azure;
           }
           .btn.btn-cancelar,.btn.btn-agregar,.btn.btn-buscar{
-              background-color: #D2AFFF;
+              background-color: #8B82B7;
               color: azure;
               font-family: 'Montserrat', sans-serif;
           }
