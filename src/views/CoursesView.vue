@@ -112,9 +112,11 @@
             background-color: #8B82B7;
             color: white;
             border: 1px solid #8B82B7;
+
             letter-spacing: 3px;
             padding: .6em 0;
         }
+
 
          .btnInscribir:hover{
             background-color: #F2B119;
