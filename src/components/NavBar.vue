@@ -1,34 +1,40 @@
 <template> 
-    <nav class="navbar">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="container-fluid d-flex align-items-center">
-            <div class="me-5">
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- <div class="container-fluid d-flex align-items-center"> -->
+            <div class="">
+
                 <img src="../assets/logo.png" alt="" width="100">
             </div>
-            <div class="d-flex flex-column" v-if="(loginTrue)">
-            <p class="mb-0 ms-4"> ¡Bienvenido!</p>                
-            <p class="mb-0"> {{$store.state.usuarioConectado}}</p>
+            <div class="d-flex flex-column mx-3" v-if="(loginTrue)">
+                <p class="mb-0 ms-4"> ¡Bienvenido!</p>                
+                <p class="mb-0"> {{$store.state.usuarioConectado}}</p>
             </div>
             <!-- <div id="logo">
                 <a v-on:click="HomePage"><img src="../assets/logo.png" alt="" width="250"></a>
             </div> -->
-            <div class="d-flex ms-auto me-3">
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul id="list-contenedor" class="d-flex justify-content-around align-items-center">
-                        <router-link class="link-nav px-3" to="/" v-if="(loginTrue)">Inicio</router-link>
-                        <router-link class="link-nav px-3" to="/CoursesView" v-if="(loginTrue)">Cursos</router-link>
-                        <router-link class="link-nav px-3" to="/AdminView" v-if="(loginTrue)">Administrador</router-link>
-                        <router-link class="link-nav px-3" to="/LoginView" v-if="(!loginTrue)">Login</router-link>
-                        <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="(loginTrue)">
-                        Logout
-                        </button>
-                        <!-- <p class="mb-0">{{usuarioConectado}}</p> -->
-                    </ul>   
+
+            <!-- <div class="d-flex ms-auto me-3"> -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- <ul id="list-contenedor" class="d-flex justify-content-around align-items-center"> -->
+                <ul id="list-contenedor" class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
+                    <li class="nav-item"><router-link class="link-nav px-3" to="/" v-if="(loginTrue)">Inicio</router-link></li>
+                    <li class="nav-item"><router-link class="link-nav px-3" to="/CoursesView" v-if="(loginTrue)">Cursos</router-link></li>
+                    <li class="nav-item"><router-link class="link-nav px-3" to="/AdminView" v-if="(loginTrue)">Administrador</router-link></li>
+                    <li class="nav-item"><router-link class="link-nav px-3" to="/LoginView" v-if="(!loginTrue)">Login</router-link></li>
+                    <li class="nav-item"><button type="button" class="btn-logout px-3" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="(loginTrue)">
+                    Logout
+                    </button></li>
+                    <!-- <p class="mb-0">{{usuarioConectado}}</p> -->
+                </ul>
             </div>
-        </div>
-    </div>  
+        </div> 
+    <!-- </div>   -->
+
 </nav>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -79,7 +85,6 @@
             }
         }
     };
-
     </script>
     <style>
     #login{
