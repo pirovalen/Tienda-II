@@ -82,7 +82,7 @@ export default {
           this.$store.state.usuarioConectado= this.loginForm.email
         );
 
-        console.log("Successfully logged in");
+
         this.$store.commit(SET_LOGIN_STATE, true);
         this.$router.push({ name: "CoursesView" });
         this.error= "";
