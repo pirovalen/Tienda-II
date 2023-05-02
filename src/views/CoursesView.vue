@@ -11,7 +11,7 @@
     </div>
     </div>
         <div class="row" v-else>
-            <div class="col-lg-4 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
+            <div class="col-lg-4  col-md-6 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
             <div class=" card border mb-3 mx-auto" style="width: 18rem;"  >
                 <img :src= "curso.img" class="card-img-top" alt="img">
                 <div class="card-body">
@@ -23,7 +23,7 @@
                     <li class="list-group-item">Cupos: {{curso.cupos }}</li>
                     <li class="list-group-item">Precio: $ {{new Intl.NumberFormat('ES', {style: 'currency', currency: 'clp' }).format(curso.precio)}}</li>
                 </ul>
-                <button class=" btnInscribir p-2">Inscribirme</button>
+                <button :class = " curso.estado === 'true' ? 'btnInscribir' : 'btnDisabled'" :disabled="curso.estado === 'false' ">{{curso.estado === 'true' ? 'Inscribirme' : 'No disponible' }}</button>
             </div>
         </div>
     </div>
@@ -108,35 +108,27 @@
         padding-top: 7rem;
         }
 
-        .btn--ver{
-        background-color: #D2AFFF;
-        border-radius: 8px;
-        border-style: none;
-        box-sizing: border-box;
-        color: #FFFFFF;
-        cursor: pointer;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 500;
-        height: 40px;
-        line-height: 20px;
-        margin-top: auto;
-        text-align: center;
-        transition: color 100ms;
-        touch-action: manipulation;
-        font-family: 'Montserrat', sans-serif;
-        }
 
         .btnInscribir {
-            background-color: #D2AFFF;
+            background-color: #8B82B7;
             color: white;
-            border: 1px solid #D2AFFF;
+            border: 1px solid #8B82B7;
+
             letter-spacing: 3px;
+            padding: .6em 0;
         }
 
-        .btnInscribir:hover{
-            background-color: #bd9ce9;
-        }
 
+         .btnInscribir:hover{
+            background-color: #F2B119;
+        } 
+
+        .btnDisabled{
+            background-color: #dadada;
+            letter-spacing: 3px;
+            color: rgb(70, 70, 70); 
+            border: 1px solid #D2AFFF;
+            padding: .6em 0;
+        }
 
     </style>

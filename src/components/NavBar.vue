@@ -1,4 +1,5 @@
 <template> 
+
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,6 +7,7 @@
             </button>
             <!-- <div class="container-fluid d-flex align-items-center"> -->
             <div class="">
+
                 <img src="../assets/logo.png" alt="" width="100">
             </div>
             <div class="d-flex flex-column mx-3" v-if="(loginTrue)">
@@ -15,6 +17,7 @@
             <!-- <div id="logo">
                 <a v-on:click="HomePage"><img src="../assets/logo.png" alt="" width="250"></a>
             </div> -->
+
             <!-- <div class="d-flex ms-auto me-3"> -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- <ul id="list-contenedor" class="d-flex justify-content-around align-items-center"> -->
@@ -31,6 +34,7 @@
             </div>
         </div> 
     <!-- </div>   -->
+
 </nav>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,19 +122,19 @@
         transform: scale(1.2);
     }
     .btn.btn-no{
-        background-color: #82daf0;
+        background-color: #8B82B7;
         color: azure;
     }
     .btn.btn-no:hover{
-        background-color: #71c3d7;
+        background-color: #8B82B7;
         color: azure;
     }
     .btn.btn-si{
-        background-color: #f082bf;
+        background-color: #F2B119;
         color: azure;
     }
     .btn.btn-si:hover{
-        background-color: #d676ab;
+        background-color: #F2B119;
         color: azure;
     }
     #exampleModal{
