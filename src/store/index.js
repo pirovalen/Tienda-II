@@ -12,7 +12,8 @@ export default createStore({
     mostrarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
     login:false,
     usuarioConectado:"",
-    carga: false
+    carga: false,
+    cursosFiltrados:  [] 
   },
 
   getters: {
@@ -29,6 +30,7 @@ export default createStore({
     },
     getCursos(state,payload){
       state.cursos = payload
+      state.cursosFiltrados = payload 
     },
     getCurso(state,payload){
       state.mostrarCurso = payload 
@@ -38,7 +40,10 @@ export default createStore({
     },
     cambiaEstadoLoginFalse (state) {
       state.login = false
-    }
+    },  
+    getCursosFiltrados(state, payload){
+      state.cursosFiltrados = payload
+    } 
 
   },
 
@@ -50,9 +55,7 @@ export default createStore({
     async getCursos ({commit}){
       const cursos = [];
       const listado = await getDocs(collection(db, "adweb-online"))
-          listado.forEach(doc => {
-            // console.log(doc.id)
-            // console.log(doc.data())      
+          listado.forEach(doc => {    
             let curso =  doc.data()
             curso.id = doc.id
             cursos.push(curso)
@@ -113,9 +116,19 @@ export default createStore({
     // CRUD -> DELETE 
 
     async eliminarCurso({commit}, idBorrar){
-      console.log("borrarDatooos")
       await deleteDoc(doc(db,"adweb-online", idBorrar))
-    }
+    },
+
+    async filtroName({ commit, state }, nombre) {
+      const filtro = state.cursos.filter((curso) => {
+        let nombresCursos = curso.nombre.toLowerCase();
+        let nombreInput = nombre.toLowerCase();
+        if (nombresCursos.includes(nombreInput)) {
+          return curso;
+        }
+      });
+      commit("getCursosFiltrados", filtro);
+    },
   },
 
   modules: {

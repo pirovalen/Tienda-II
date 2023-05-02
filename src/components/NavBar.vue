@@ -65,6 +65,9 @@
          },
         methods:{
             ...mapMutations(['cambiaEstadoLoginFalse']),
+
+        // Cerrar sesión -> método signOut
+
             async logout() {
                 try {
                     await auth.signOut();

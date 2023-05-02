@@ -11,7 +11,7 @@
     </div>
     </div>
         <div class="row" v-else>
-            <div class="col-lg-4  col-md-6 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
+            <div class="col-lg-4 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
             <div class=" card border mb-3 mx-auto" style="width: 18rem;"  >
                 <img :src= "curso.img" class="card-img-top" alt="img">
                 <div class="card-body">
@@ -107,7 +107,6 @@
         .card-body{
         padding-top: 7rem;
         }
-
 
         .btnInscribir {
             background-color: #8B82B7;

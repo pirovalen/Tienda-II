@@ -11,7 +11,7 @@
     <div  v-else>
   <div class="row justify-content-center py-4" id="searchContainer">
       <div id="search"  class="col-8" style="display: flex;">
-        <input id="input-search" class="w-100 me-2"  type="text" placeholder="Ingrese su búsqueda" >
+        <input id="input-search" v-model = "texto" @keyup= "formulario" class="form-control w-100 me-2"  type="text" placeholder="Ingrese su búsqueda" >
         <button id="buttonSearch" class="btn btn-buscar" >
           <i class="fa fa-search"></i> Buscar
         </button>
@@ -39,7 +39,7 @@
       </thead>
 
       <TBody>
-          <tr v-for="curso in cursos" :key="curso.nombre">
+          <tr v-for="curso in cursosFiltrados" :key="curso.nombre">
               <td  class="text-center">{{curso.id}}</td>
               <td  class="text-center">{{curso.nombre}}</td>
               <td  class="text-center">{{curso.descripcion}}</td>
@@ -55,7 +55,6 @@
                   <button class="btn btn-modificar"  id="modificar" @click="getCurso(curso.id)" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button>
               </td>
               <td class="text-center"><button class="btn btn-modificar" id="borrar" type="button" @click="mensajeBorraCurso(curso.id)">&#128465;</button></td>
-
           </tr>
       </tbody>
       </table>
@@ -155,21 +154,26 @@
       name: 'AdminTable',
       components: {
          FadeLoader
-      },  
+      },
       data(){
         return{
           agregarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
           idBorrarCurso: '',
-          color: '#d676ab'
-    
+          color: '#d676ab',
+          texto : '',    
         }
       },
       created(){
             this.getCursos()
             this.getCurso(this.idEditar)
         },
-        methods: {
-          ...mapActions(['getCursos', 'getCurso', 'crearCurso', 'modificarCurso','eliminarCurso']),
+        methods: { 
+          formulario() {
+            this.$store.dispatch('filtroName', this.texto)
+        }
+
+          ,
+          ...mapActions(['getCursos', 'getCurso', 'crearCurso', 'modificarCurso','eliminarCurso', 'filtroName']),
 
         // SweetAlert para agregar curso
 
@@ -238,13 +242,14 @@
 
           resetearCurso(){
             this.agregarCurso =  {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''}
-          }
+          },
+
 
         },
 
         computed : {
-        ...mapState(['cursos', 'mostrarCurso', 'agregarCurso'])
-        },
+        ...mapState(['cursos', 'mostrarCurso', 'agregarCurso', 'cursosFiltrados']),
+        },  
         
       }
 
