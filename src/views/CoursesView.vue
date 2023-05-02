@@ -2,8 +2,9 @@
     <div class="titulo">
     <h2>Inscríbete hoy y aprende desde tu casa</h2>
     </div>
-    <div class="subtitulo py-3">
-    <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p></div>
+    <div class="subtitulo py-3 ">
+        <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p>
+    </div>
     <div class="container mt-5">
         <div class="row justify-content-center py-5" v-if="($store.state.cursos.length) == 0">
     <div class="col-auto">
@@ -11,7 +12,7 @@
     </div>
     </div>
         <div class="row" v-else>
-            <div class="col-lg-4  col-md-6 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
+            <div class="col-lg-4 mb-5 col-md-6" v-for="curso in cursos" :key="curso.nombre"> 
             <div class=" card border mb-3 mx-auto" style="width: 18rem;"  >
                 <img :src= "curso.img" class="card-img-top" alt="img">
                 <div class="card-body">
@@ -89,7 +90,7 @@
         text-align: center;
         font-family: 'Montserrat', sans-serif;
         font-size: 18px;
-        padding-inline: 15rem ;
+        padding-inline: 1rem;
         }
 
         .card {
@@ -107,7 +108,6 @@
         .card-body{
         padding-top: 7rem;
         }
-
 
         .btnInscribir {
             background-color: #8B82B7;
