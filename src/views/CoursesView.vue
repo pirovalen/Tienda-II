@@ -1,9 +1,10 @@
 <template>
     <div class="titulo">
-    <h2>Inscribite hoy y aprende desde tu casa</h2>
+    <h2>Inscríbete hoy y aprende desde tu casa</h2>
     </div>
-    <div class="subtitulo">
-    <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p></div>
+    <div class="subtitulo py-3 ">
+        <p>Clases online en vivo dictadas por referentes de la industria, enfoque 100% práctico, mentorías personalizadas y acceso a una comunidad de +210.000 estudiantes.</p>
+    </div>
     <div class="container mt-5">
         <div class="row justify-content-center py-5" v-if="($store.state.cursos.length) == 0">
     <div class="col-auto">
@@ -11,8 +12,8 @@
     </div>
     </div>
         <div class="row" v-else>
-            <div class="col-lg-4 mb-5" v-for="curso in cursos" :key="curso.nombre"> 
-            <div class=" card border-info mb-3 mx-auto" style="width: 18rem;"  >
+            <div class="col-lg-4 mb-5 col-md-6" v-for="curso in cursos" :key="curso.nombre"> 
+            <div class=" card border mb-3 mx-auto" style="width: 18rem;"  >
                 <img :src= "curso.img" class="card-img-top" alt="img">
                 <div class="card-body">
                     <h5 class="card-title text-center">{{curso.nombre}}</h5>
@@ -23,7 +24,7 @@
                     <li class="list-group-item">Cupos: {{curso.cupos }}</li>
                     <li class="list-group-item">Precio: $ {{new Intl.NumberFormat('ES', {style: 'currency', currency: 'clp' }).format(curso.precio)}}</li>
                 </ul>
-                <button class=" btnInscribir p-2">Inscribirme</button>
+                <button :class = " curso.estado === 'true' ? 'btnInscribir' : 'btnDisabled'" :disabled="curso.estado === 'false' ">{{curso.estado === 'true' ? 'Inscribirme' : 'No disponible' }}</button>
             </div>
         </div>
     </div>
@@ -39,7 +40,7 @@
         name: "Home-View",
         data() {
             return {
-            color:'#d676ab'
+            color:'#F2B119'
         }
         },
 
@@ -89,11 +90,12 @@
         text-align: center;
         font-family: 'Montserrat', sans-serif;
         font-size: 18px;
-        padding-inline: 15rem ;
+        padding-inline: 1rem;
         }
 
-        .card{
+        .card {
             font-family: 'Montserrat', sans-serif;
+            border-color: #D2AFFF;
         }
 
         .card-img-top{
@@ -107,35 +109,26 @@
         padding-top: 7rem;
         }
 
-        .btn--ver{
-        background-color: #EA4C89;
-        border-radius: 8px;
-        border-style: none;
-        box-sizing: border-box;
-        color: #FFFFFF;
-        cursor: pointer;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 500;
-        height: 40px;
-        line-height: 20px;
-        margin-top: auto;
-        text-align: center;
-        transition: color 100ms;
-        touch-action: manipulation;
-        font-family: 'Montserrat', sans-serif;
-        }
-
         .btnInscribir {
-            background-color: #71c3d7;
+            background-color: #8B82B7;
             color: white;
-            border: 1px solid #71c3d7;
+            border: 1px solid #8B82B7;
+
             letter-spacing: 3px;
+            padding: .6em 0;
         }
 
-        .btnInscribir:hover{
-            background-color: #f082bf;
-        }
 
+         .btnInscribir:hover{
+            background-color: #F2B119;
+        } 
+
+        .btnDisabled{
+            background-color: #dadada;
+            letter-spacing: 3px;
+            color: rgb(70, 70, 70); 
+            border: 1px solid #D2AFFF;
+            padding: .6em 0;
+        }
 
     </style>

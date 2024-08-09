@@ -1,69 +1,65 @@
 <template>
   <div class="container">
-  <div class="row">
-  <h2 class="titulo">Administrador de Cursos</h2>
-  </div>
-  <div class="row justify-content-center py-5" v-if="($store.state.cursos.length) == 0">
-      <div class="col-auto">
-      <fade-loader :loading="loading" :color="color" :size="size" class="mb-5"></fade-loader>
+    <div class="row">
+      <h2 class="titulo">Administrador de Cursos</h2>
     </div>
-    </div>
-    <div v-else>
-  <div class="row justify-content-between py-4" id="searchContainer">
-      <div id="search"  class="col-8" style="display: flex;">
-        <input id="input-search" class="w-100 mx-2"  type="text" placeholder="Ingrese su búsqueda" >
-        <button id="buttonSearch" class="btn btn-buscar" >
-          <i class="fa fa-search"></i> Buscar
-        </button>
+    <div class="row justify-content-center py-5" v-if="($store.state.cursos.length) == 0">
+        <div class="col-auto">
+          <fade-loader :loading="loading" :color="color" :size="size" class="mb-5"></fade-loader>
+        </div>
       </div>
-      <div class="col-2"> 
-        <button type="button" class="btn btn-agregar" id="new" data-bs-toggle="modal" data-bs-target="#createModal" >Agregar Curso</button>
-          
+      <div  v-else>
+        <div class="row justify-content-center py-4" id="searchContainer">
+          <div id="search"  class="col-8" style="display: flex;">
+            <input id="input-search" v-model = "texto" @keyup= "formulario" class="form-control w-100 me-2"  type="text" placeholder="Ingrese su búsqueda" >
+            <button id="buttonSearch" class="btn btn-buscar" >
+              <i class="fa fa-search"></i> Buscar
+            </button>
+          </div>
+          <div class="col-2" style="display: flex;"> 
+            <button type="button" class="btn btn-agregar" id="new" data-bs-toggle="modal" data-bs-target="#createModal" >Agregar Curso</button>
+          </div>
+        </div>
+        <div class=" table-responsive contenedorTabla">
+          <table class="table table-bordered table-hover align-middle">
+          <thead class="table-primary">
+              <tr>
+                  <th scope="col" class="text-center">Código</th>
+                  <th scope="col" class="text-center">Nombre</th>
+                  <th scope="col" class="text-center">Descripción</th>
+                  <th scope="col" class="text-center">Duración</th>
+                  <th scope="col" class="text-center">Precio</th>
+                  <th scope="col" class="text-center">Cupos</th>
+                  <th scope="col" class="text-center">Inscritos</th>
+                  <th scope="col" class="text-center">Imagen</th>
+                  <th scope="col" class="text-center">Estado</th>
+                  <th scope="col" class="text-center">Modificar</th>
+                  <th scope="col" class="text-center">Eliminar</th>
+              </tr>
+        </thead>
+
+        <TBody>
+            <tr v-for="curso in cursosFiltrados" :key="curso.nombre">
+                <td  class="text-center">{{curso.id}}</td>
+                <td  class="text-center">{{curso.nombre}}</td>
+                <td  class="text-center">{{curso.descripcion}}</td>
+                <td  class="text-center">{{curso.duracion}}</td>
+                <td  class="text-center">$ {{new Intl.NumberFormat('ES', {style: 'currency', currency: 'clp' }).format(curso.precio)}}</td>
+                <td  class="text-center">{{curso.cupos}}</td>
+                <td  class="text-center">{{curso.inscritos}}</td>
+                <td  class="text-center" > 
+                  <img :src= "curso.img" id="card-img-top" alt="img">
+                </td>
+                <td  class="text-center">{{curso.estado}}</td>
+                <td class="text-center">
+                    <button class="btn btn-modificar"  id="modificar" @click="getCurso(curso.id)" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button>
+                </td>
+                <td class="text-center"><button class="btn btn-modificar" id="borrar" type="button" @click="mensajeBorraCurso(curso.id)">&#128465;</button></td>
+            </tr>
+        </tbody>
+        </table>
       </div>
-    </div>
-    <div class="contenedorTabla">
-
-      <table class="table table-bordered align-middle">
-      <thead class="table-primary">
-          <tr>
-              <th scope="col" class="text-center">Código</th>
-              <th scope="col" class="text-center">Nombre</th>
-              <th scope="col" class="text-center">Descripción</th>
-              <th scope="col" class="text-center">Duración</th>
-              <th scope="col" class="text-center">Precio</th>
-              <th scope="col" class="text-center">Cupos</th>
-              <th scope="col" class="text-center">Inscritos</th>
-              <th scope="col" class="text-center">Imagen</th>
-              <th scope="col" class="text-center">Estado</th>
-              <th scope="col" class="text-center">Modificar</th>
-              <th scope="col" class="text-center">Eliminar</th>
-          </tr>
-      </thead>
-
-      <TBody>
-          <tr v-for="curso in cursos" :key="curso.nombre">
-              <td  class="text-center">{{curso.id}}</td>
-              <td  class="text-center">{{curso.nombre}}</td>
-              <td  class="text-center">{{curso.descripcion}}</td>
-              <td  class="text-center">{{curso.duracion}}</td>
-              <td  class="text-center">$ {{new Intl.NumberFormat('ES', {style: 'currency', currency: 'clp' }).format(curso.precio)}}</td>
-              <td  class="text-center">{{curso.cupos}}</td>
-              <td  class="text-center">{{curso.inscritos}}</td>
-              <td  class="text-center" > 
-                <img :src= "curso.img" id="card-img-top" alt="img">
-              </td>
-              <td  class="text-center">{{curso.estado}}</td>
-              <td class="text-center">
-                  <button class="btn btn-modificar"  id="modificar" @click="getCurso(curso.id)" type="button" data-bs-toggle="modal" data-bs-target="#editModal">&#9998;</button>
-              </td>
-              <td class="text-center"><button class="btn btn-modificar" id="borrar" type="button" @click="mensajeBorraCurso(curso.id)">&#128465;</button></td>
-
-          </tr>
-      </tbody>
-      </table>
-    </div>
-    </div>
-
+      </div>
   </div>
 
 
@@ -157,21 +153,26 @@
       name: 'AdminTable',
       components: {
          FadeLoader
-      },  
+      },
       data(){
         return{
           agregarCurso: {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''},
           idBorrarCurso: '',
-          color: '#d676ab'
-    
+          color: '#d676ab',
+          texto : '',    
         }
       },
       created(){
             this.getCursos()
             this.getCurso(this.idEditar)
         },
-        methods: {
-          ...mapActions(['getCursos', 'getCurso', 'crearCurso', 'modificarCurso','eliminarCurso']),
+        methods: { 
+          formulario() {
+            this.$store.dispatch('filtroName', this.texto)
+        }
+
+          ,
+          ...mapActions(['getCursos', 'getCurso', 'crearCurso', 'modificarCurso','eliminarCurso', 'filtroName']),
 
         // SweetAlert para agregar curso
 
@@ -200,8 +201,8 @@
               title: '¿Estás seguro de borrar este curso?',
               icon: 'warning',
               showCancelButton: true,
-              confirmButtonColor: '#f082bf',
-              cancelButtonColor: '#71c3d7',
+              confirmButtonColor: '#f2b119',
+              cancelButtonColor: '#8B82B7',
               confirmButtonText: 'Si, Borrar'
             }).then((result) => {
               if (result.isConfirmed) {
@@ -240,13 +241,14 @@
 
           resetearCurso(){
             this.agregarCurso =  {codigo: '', nombre: '', estado: '', precio: '', duracion: '', descripcion: '', cupos: '', inscritos: '', img: ''}
-          }
+          },
+
 
         },
 
         computed : {
-        ...mapState(['cursos', 'mostrarCurso', 'agregarCurso'])
-        },
+        ...mapState(['cursos', 'mostrarCurso', 'agregarCurso', 'cursosFiltrados']),
+        },  
         
       }
 
@@ -285,32 +287,43 @@
       }
 
       .btn.btn-crear,.btn.btn-modificar{
-              background-color: #82daf0;
+              background-color: #8B82B7;
               color: azure;
               font-family: 'Montserrat', sans-serif;
               margin: 0;
           }
           .btn.btn-crear:hover,.btn.btn-modificar:hover{
-              background-color: #71c3d7;
+              background-color: #f2b119;
               color: azure;
           }
           .btn.btn-cancelar,.btn.btn-agregar,.btn.btn-buscar{
-              background-color: #f082bf;
+              background-color: #8B82B7;
               color: azure;
               font-family: 'Montserrat', sans-serif;
           }
+
+          .btn.btn-agregar{
+              background-color: #f2b119;
+              color: azure;
+              font-family: 'Montserrat', sans-serif;
+          }
+
           .btn.btn-cancelar:hover,.btn.btn-agregar:hover,.btn.btn-buscar:hover{
-              background-color: #d676ab;
+              background-color: #f2b119;
+              color: azure;
+          }
+
+          .btn.btn-agregar:hover{
+              background-color: #f3c65c;
               color: azure;
           }
 
           .btn.btn-eliminar{
-              background-color: #964a74;
+              background-color: #f2b119;
               color: azure;
           }
           .btn.btn-eliminar:hover{
-              background-color: #693a54;
+              background-color: #f2b119;
               color: azure;
           }
-
     </style>

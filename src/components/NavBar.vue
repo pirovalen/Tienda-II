@@ -1,33 +1,25 @@
 <template> 
-    <div class="navbar">
-        <div class="container-fluid d-flex align-items-center">
-            <div class="me-5">
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="">
+
                 <img src="../assets/logo.png" alt="" width="100">
             </div>
-            <div class="d-flex flex-column" v-if="(loginTrue)">
-            <p class="mb-0 ms-4"> ¡Bienvenido!</p>                
-            <p class="mb-0"> {{$store.state.usuarioConectado}}</p>
+            <div class="d-flex flex-column mx-3" v-if="(loginTrue)">
+                <p class="mb-0 ms-4"> ¡Bienvenido!</p>                
+                <p class="mb-0"> {{$store.state.usuarioConectado}}</p>
             </div>
-            <!-- <div id="logo">
-                <a v-on:click="HomePage"><img src="../assets/logo.png" alt="" width="250"></a>
-            </div> -->
-            <div class="d-flex ms-auto me-3">
-                <nav>
-                    <ul id="list-contenedor" class="d-flex justify-content-around align-items-center">
-                        <router-link class="link-nav px-3" to="/" v-if="(loginTrue)">Inicio</router-link>
-                        <router-link class="link-nav px-3" to="/CoursesView" v-if="(loginTrue)">Cursos</router-link>
-                        <router-link class="link-nav px-3" to="/AdminView" v-if="(loginTrue)">Administrador</router-link>
-                        <router-link class="link-nav px-3" to="/LoginView" v-if="(!loginTrue)">Login</router-link>
-                        <button type="button" class="btn-logout" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="(loginTrue)">
-                        Logout
-                        </button>
-                        <!-- <p class="mb-0">{{usuarioConectado}}</p> -->
-                    
-                    </ul>   
-                </nav>
+
             </div>
-        </div>
-    </div>
+        </div> 
+
+
+</nav>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -63,6 +55,9 @@
          },
         methods:{
             ...mapMutations(['cambiaEstadoLoginFalse']),
+
+        // Cerrar sesión -> método signOut
+
             async logout() {
                 try {
                     await auth.signOut();
@@ -77,7 +72,6 @@
             }
         }
     };
-
     </script>
     <style>
     #login{
@@ -85,7 +79,7 @@
     }
     .navbar{
         list-style-type: none;
-        background-color: #82daf0;
+        background-color: #8B82B7;
         color: azure;
         padding: .5rem 2rem;
         font-size: 16px;
@@ -98,7 +92,7 @@
         transition: all 0.5s ease;
     }
     .link-nav:hover{
-        color: #F57ED2;
+        color: #F2B119;
         transform: scale(1.2);
     }
     .list-item{
@@ -109,25 +103,25 @@
         color: azure;
         border: none;
         transition: all 0.5s ease;
-        background-color: #F57ED2;
+        background-color: #F2B119;
     }
     .btn-logout:hover{
         transform: scale(1.2);
     }
     .btn.btn-no{
-        background-color: #82daf0;
+        background-color: #8B82B7;
         color: azure;
     }
     .btn.btn-no:hover{
-        background-color: #71c3d7;
+        background-color: #8B82B7;
         color: azure;
     }
     .btn.btn-si{
-        background-color: #f082bf;
+        background-color: #F2B119;
         color: azure;
     }
     .btn.btn-si:hover{
-        background-color: #d676ab;
+        background-color: #F2B119;
         color: azure;
     }
     #exampleModal{

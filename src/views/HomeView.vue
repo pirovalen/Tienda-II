@@ -2,7 +2,6 @@
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
   <div class="carousel-inner">
     <div class="carousel-item active align-middle h-50">
-      <img src="../assets/home1.png" class="d-block w-100" alt="">
       <div class="carousel-caption d-none d-md-block align-middle">
         <h5>Aprendizaje Colaborativo</h5>
         <p>mejora tu aprendizaje trabajando en equipo</p>
@@ -26,12 +25,12 @@
 </div>
 </template>
     
-    
 <script>
  
   export default {
   name: "Home-View",
     
+
   }
     
 </script>

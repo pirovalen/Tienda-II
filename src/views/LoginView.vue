@@ -14,11 +14,11 @@
       <div id="login" class="mt-2"> 
         <p>¿No tienes cuenta?</p>
         <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="btnRegistro">Regístrate!</button>
-      <!-- <button @click="accessToken()">Access Token</button> -->
+    
       </div>
     </form>
     <br />
-    <div v-if="error">{{ error }}</div>
+    <div v-if="error" class ="mb-4" >{{ error }}</div>
   </div>
 
 <!-- Modal -->
@@ -70,6 +70,9 @@ export default {
   },
   methods: {
 ...mapMutations(['cambiaEstadoLoginFalse']),
+
+    // Login o acceso de usuarios existentes -> método signInWithEmailAndPassword
+
     async login() {
       try {
         if (!this.$refs.form.checkValidity()) return;
@@ -79,7 +82,7 @@ export default {
           this.$store.state.usuarioConectado= this.loginForm.email
         );
 
-        console.log("Successfully logged in");
+
         this.$store.commit(SET_LOGIN_STATE, true);
         this.$router.push({ name: "CoursesView" });
         this.error= "";
@@ -89,7 +92,9 @@ export default {
         this.error = "Usuario o clave incorrecta";
       }
     },
-    
+
+    // Registro de usuarios nuevos -> método createUserWithEmailAndPassword
+
     registrarUsuario (){
       auth.createUserWithEmailAndPassword(this.loginForm.email1,this.loginForm.password1)
         .then((userCredential)=> {     
@@ -100,7 +105,6 @@ export default {
         this.$store.commit(cambiaEstadoLogin);
       })
       .catch((error) => {
-       
         this.$store.state.usuarioConectado='';
         this.codigoError = error.code;
         this.mensajeError = error.message;
@@ -115,6 +119,9 @@ export default {
     }
   },
   mounted() {
+
+    // Para obtener el usuario con sesión activa -> método onAuthStateChanged 
+
     auth.onAuthStateChanged((user) =>{
       this.$store.state.usuarioConectado=user.email
       this.showAlert("Sesión iniciada")
@@ -157,7 +164,7 @@ export default {
 button[type="submit"] {
   margin-top: 1.5em;
   padding: 10px 20px;
-  background-color: #f082bf;
+  background-color: #F2B119;
   border: none;
   color: #fff;
   border-radius: 5px;
@@ -170,7 +177,7 @@ button[type="submit"] {
 #btnRegistro, #cerrarModalRegistro{
   background-color: white;
   color: black;
-  border: 2px solid #f082bf;
+  border: 2px solid #F2B119;
   margin: 0 0 2em 0;
 }
 
@@ -179,6 +186,6 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #82daf0;
+  background-color: #8B82B7;
 }
 </style>
