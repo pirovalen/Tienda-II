@@ -15,18 +15,6 @@
                 <p class="mb-0"> {{$store.state.usuarioConectado}}</p>
             </div>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-
-                <ul id="list-contenedor" class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
-                    <li class="nav-item"><router-link class="link-nav px-3" to="/" v-if="(loginTrue)">Inicio</router-link></li>
-                    <li class="nav-item"><router-link class="link-nav px-3" to="/CoursesView" v-if="(loginTrue)">Cursos</router-link></li>
-                    <li class="nav-item"><router-link class="link-nav px-3" to="/AdminView" v-if="(loginTrue)">Administrador</router-link></li>
-                    <li class="nav-item"><router-link class="link-nav px-3" to="/LoginView" v-if="(!loginTrue)">Login</router-link></li>
-                    <li class="nav-item"><button type="button" class="btn-logout px-3" data-bs-toggle="modal" data-bs-target="#exampleModal" v-if="(loginTrue)">
-                    Logout
-                    </button></li>
-
-                </ul>
             </div>
         </div> 
 
